@@ -1,0 +1,9 @@
+{
+  "name": "node-examples",
+  "version": "0.0.0",
+  "main": "main.js",
+  "dependencies": {
+    "mongodb": "^2.0.28"
+  },
+  "private": true
+}
