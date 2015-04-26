@@ -1,9 +1,12 @@
 {
   "name": "node-examples",
+  "author": "Romain Cotte",
   "version": "0.0.0",
   "main": "main.js",
   "dependencies": {
-    "mongodb": "^2.0.28"
+    "bluebird": "^2.9.24",
+    "mongodb": "^2.0.28",
+    "should": "^6.0.1"
   },
   "private": true
 }
