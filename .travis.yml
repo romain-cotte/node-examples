@@ -1,3 +1,7 @@
+services:
+  - mongodb
+  - redis-server
+
 install:
   - npm install -g mocha
   - npm install
