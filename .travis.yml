@@ -1,4 +1,5 @@
 install:
+  - npm install -g mocha
   - npm install
 
 script:
