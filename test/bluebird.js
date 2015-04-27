@@ -2,8 +2,8 @@
 
 var Promise = require('bluebird');
 
-var should  = require('should');
-var fs = Promise.promisifyAll(require('fs'));
+var fs     = Promise.promisifyAll(require('fs'));
+var should = require('should');
 
 describe('Bluebird', function() {
   it('should read package.json', function(done) {
