@@ -5,6 +5,9 @@ var Promise = require('bluebird');
 var fs     = Promise.promisifyAll(require('fs'));
 var should = require('should');
 
+/**
+ * See https://github.com/petkaantonov/bluebird
+ */
 describe('Bluebird', function() {
   it('should read package.json', function(done) {
     fs.readFileAsync('package.json')

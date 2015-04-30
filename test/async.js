@@ -1,9 +1,9 @@
 var async   = require('async');
 var should  = require('should');
 
-
-
-
+/**
+ * See https://github.com/caolan/async
+ */
 describe('Async', function () {
   it('waterfall', function(done) {
     async.waterfall([
@@ -13,7 +13,6 @@ describe('Async', function () {
       function (arg1, arg2, next) {
         arg1.should.eql('one');
         arg2.should.eql('two');
-        // arg1 now equals 'one' and arg2 now equals 'two'
         next(null, 'done');
       }
     ], function (err, result) {
@@ -77,7 +76,6 @@ describe('Async', function () {
     });
   });
 
-
   it('error', function (done) {
     async.waterfall([
       function (next) {
@@ -91,28 +89,26 @@ describe('Async', function () {
     });
   });
 
-
-
-
-
-
-  // it('async process.nextTick', function (done) {
-  //   async.series([
-  //     function (callback) {
-  //       console.log(0);
-  //       process.nextTick(callback);
-  //     },
-  //     function (callback) {
-  //       console.log(1);
-  //       callback(null);
-  //     }
-  //   ], function (err, results) {
-  //     should.not.exist(err);
-  //     done();
-  //   });
-  //   console.log('a');
-  //   -> 0 a 1
-  // });
+  it('async process.nextTick', function (done) {
+    async.series([
+      function (callback) {
+        console.log(0);
+        process.nextTick(callback);
+      },
+      function (callback) {
+        console.log(1);
+        callback(null);
+      }
+    ], function (err, results) {
+      should.not.exist(err);
+      done();
+    });
+    console.log('a');
+    // Will display :
+    // 0
+    // a
+    // 1
+  });
 
 });
 

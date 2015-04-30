@@ -4,7 +4,7 @@ var ObjectId  = mongoose.Types.ObjectId;
 var should    = require('should');
 var User      = require('../models/user');
 
-describe('Async', function () {
+describe('Mongoose', function () {
   var user;
   var userContent = {
     firstname: 'Firstname',
@@ -70,7 +70,7 @@ describe('Async', function () {
     });
   });
 
-  it('findOne - ', function (done) {
+  it('findOne', function (done) {
     User.findOne({ _id: user._id }, function (err, res) {
       should.not.exist(err);
       res.firstname.should.eql(userContent.firstname);
