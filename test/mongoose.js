@@ -31,8 +31,14 @@ describe('Mongoose', function () {
     });
   });
 
-  after(function () {
-    mongoose.disconnect();
+  after(function (done) {
+    User.remove({}, function (err, status/*, status no more */) {
+      should.not.exist(err);
+      status.result.ok.should.eql(1);
+      status.result.n.should.eql(3);
+      mongoose.disconnect();
+      done();
+    });
   });
 
   it('create an ObjectId ', function (done) {
@@ -43,7 +49,6 @@ describe('Mongoose', function () {
   });
 
   it('findOne with a bad ObjectId', function (done) {
-    /* _id is mandatory ! */
     User.findOne({ _id: 'badObjectId' }, function (err, res) {
       err.message.should.eql('Cast to ObjectId failed for value "badObjectId" at path "_id"');
       err.name.should.eql('CastError');
@@ -129,13 +134,21 @@ describe('Mongoose', function () {
     });
   });
 
-  it('remove', function (done) {
-    User.remove({}, function (err, status/*, status no more */) {
-      should.not.exist(err);
-      status.result.ok.should.eql(1);
-      status.result.n.should.eql(3);
-      done();
+  it('stream', function (done) {
+    var stream = User.find().stream();
+    var count = 0;
+    stream.on('data', function (doc) {
+      count++;
     });
+
+    stream.on('error', function (err) {
+      should.not.exist(err);
+    })
+
+    stream.on('close', function () {
+      count.should.eql(3);
+      done();
+    })
   });
 
 });
