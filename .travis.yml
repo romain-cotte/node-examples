@@ -1,6 +1,7 @@
 services:
   - mongodb
   - redis-server
+  - rabbitmq
 
 install:
   - npm install -g mocha
