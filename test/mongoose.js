@@ -15,6 +15,9 @@ describe('Mongoose', function () {
     }
   };
   before(function (done) {
+    /**
+     * see http://mongoosejs.com/docs/connections.html
+     */
     mongoose.connect('localhost:27017/node-examples');
     user = new User(userContent);
     (typeof user._id).should.eql('object');
