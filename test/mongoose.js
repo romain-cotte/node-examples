@@ -1,8 +1,11 @@
-var async     = require('async');
-var mongoose  = require('mongoose');
-var ObjectId  = mongoose.Types.ObjectId;
-var should    = require('should');
-var User      = require('../models/user');
+'use strict';
+
+var async    = require('async');
+var mongoose = require('mongoose');
+var ObjectId = mongoose.Types.ObjectId;
+var should   = require('should');
+
+var User = require('../models/user');
 
 describe('Mongoose', function () {
   var user;
@@ -22,13 +25,13 @@ describe('Mongoose', function () {
     user = new User(userContent);
     (typeof user._id).should.eql('object');
     async.series([
-      function (callback) {
-        User.remove(callback);
+      function (next) {
+        User.remove(next);
       },
-      function (callback) {
-        user.save(callback);
+      function (next) {
+        user.save(next);
       }
-    ], function (err, results) {
+    ], function (err) {
       (typeof user._id).should.eql('object');
       done(err);
     });
@@ -52,7 +55,7 @@ describe('Mongoose', function () {
   });
 
   it('findOne with a bad ObjectId', function (done) {
-    User.findOne({ _id: 'badObjectId' }, function (err, res) {
+    User.findOne({ _id: 'badObjectId' }, function (err/*, res*/) {
       err.message.should.eql('Cast to ObjectId failed for value "badObjectId" at path "_id"');
       err.name.should.eql('CastError');
       err.kind.should.eql('ObjectId');
@@ -111,7 +114,7 @@ describe('Mongoose', function () {
   it('save a user with a specific _id', function (done) {
     userContent._id = ObjectId.createPk();
     var user = new User(userContent);
-    user.save(function (err, res, nbSaved) { 
+    user.save(function (err, res/*, nbSaved*/) {
       should.not.exist(err);
       res._id.should.eql(userContent._id);
       done();
@@ -140,18 +143,18 @@ describe('Mongoose', function () {
   it('stream', function (done) {
     var stream = User.find().stream();
     var count = 0;
-    stream.on('data', function (doc) {
+    stream.on('data', function (/*doc*/) {
       count++;
     });
 
     stream.on('error', function (err) {
       should.not.exist(err);
-    })
+    });
 
     stream.on('close', function () {
       count.should.eql(3);
       done();
-    })
+    });
   });
 
 });

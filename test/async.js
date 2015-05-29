@@ -1,3 +1,5 @@
+'use strict';
+
 var async   = require('async');
 var should  = require('should');
 
@@ -41,11 +43,11 @@ describe('Async', function () {
 
   it('series', function(done) {
     async.series([
-      function (callback) {
-        callback(null, 'one');
+      function (next) {
+        next(null, 'one');
       },
-      function (callback) {
-        callback(null, 'two');
+      function (next) {
+        next(null, 'two');
       }
     ], function (err, results) {
       var arg2 = results.pop();
@@ -83,7 +85,7 @@ describe('Async', function () {
         /* Throw an error here */
         next(null, 'result');
       },
-    ], function (err, result) {
+    ], function (err/*, result === 'result' */) {
       should.not.exist(err);
       done();
     });
@@ -91,15 +93,15 @@ describe('Async', function () {
 
   it('async process.nextTick', function (done) {
     async.series([
-      function (callback) {
+      function (next) {
         console.log(0);
-        process.nextTick(callback);
+        process.nextTick(next);
       },
-      function (callback) {
+      function (next) {
         console.log(1);
-        callback(null);
+        next(null);
       }
-    ], function (err, results) {
+    ], function (err) {
       should.not.exist(err);
       done();
     });

@@ -1,5 +1,6 @@
-var async  = require('async');
-var should = require('should');
+'use strict';
+
+var should = require('should');// jshint ignore:line
 
 describe('Array', function () {
   var array = [1, 2, 3, 4, 5, 6, 10];

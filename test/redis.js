@@ -1,4 +1,5 @@
-var _      = require('lodash');
+'use strict';
+
 var async  = require('async');
 var redis  = require('redis');
 var should = require('should');
@@ -21,12 +22,12 @@ describe('Redis', function () {
   it('set - get', function (done) {
     var key = 'key', value = 'value';
     async.waterfall([
-      function (callback) {
-        client.set(key, value, callback);
+      function (next) {
+        client.set(key, value, next);
       },
-      function (res, callback) {
+      function (res, next) {
         res.should.eql('OK');
-        client.get(key, callback);
+        client.get(key, next);
       }
     ], function (err, result) {
       should.not.exist(err);
@@ -38,19 +39,19 @@ describe('Redis', function () {
   it('storing hash', function (done) {
     var key = 'key 0';
     async.waterfall([
-      function (callback) {
-        client.del(key, callback);
+      function (next) {
+        client.del(key, next);
       },
-      function (r, callback) {
-        client.hset(key, 'property', 'value', callback);
+      function (r, next) {
+        client.hset(key, 'property', 'value', next);
       },
-      function (res, callback) {
+      function (res, next) {
         res.should.eql(1);
-        client.hkeys(key, callback)
+        client.hkeys(key, next);
       },
-      function (res, callback) {
+      function (res, next) {
         res.should.eql(['property']);
-        client.hgetall(key, callback);
+        client.hgetall(key, next);
       },
     ], function (err, result) {
       should.not.exist(err);
@@ -67,12 +68,12 @@ describe('Redis', function () {
       property3: 'value3'
     };
     async.waterfall([
-      function (callback) {
+      function (next) {
         client.hmset(key, 'property1', 'value1',
-         'property2', 'value2', 'property3', 'value3', callback);
+         'property2', 'value2', 'property3', 'value3', next);
       },
-      function (result, callback) {
-        client.hgetall(key, callback);
+      function (result, next) {
+        client.hgetall(key, next);
       }
     ], function (err, result) {
       should.not.exist(err);

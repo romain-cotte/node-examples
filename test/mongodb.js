@@ -6,10 +6,10 @@ var should  = require('should');
 
 var url = 'mongodb://localhost:27017/node-examples';
 
-describe('Mongodb', function() {
+describe('Mongodb', function () {
   var db, collection;
 
-  before(function(done) {
+  before(function (done) {
     async.waterfall([
       function (next) {
         /* Database connection */
@@ -21,22 +21,21 @@ describe('Mongodb', function() {
         /* Remove all documents for tests */
         collection.remove({}, next);
       }
-    ], function (err, result) {
-      should.not.exist(err);
-      done();
+    ], function (err) {
+      done(err);
     });
   });
 
-  after(function(done) {
+  after(function (done) {
     db.close();
     done();
   });
 
-  it('should insert 3 documents into the document collection', function(done) {
+  it('should insert 3 documents into the document collection', function (done) {
     collection
       .insert([
         { a : 1 }, { a : 2 }, { a : 3 }
-      ], function(err, result) {
+      ], function (err, result) {
         should.not.exist(err);
         result.result.n.should.eql(3);
         result.ops.length.should.eql(3);
@@ -44,7 +43,7 @@ describe('Mongodb', function() {
       });
   });
 
-  it('should retrieve documents of document collection', function(done) {
+  it('should retrieve documents of document collection', function (done) {
     collection.find({ a: 1 }).toArray(function (err, documents) {
       should.not.exist(err);
       documents.length.should.eql(1);
@@ -52,9 +51,10 @@ describe('Mongodb', function() {
     });
   });
 
-  it('should update a document', function(done) {
+  it('should update a document', function (done) {
      collection.update({ a : 2 },
-        { $set: { b : 1 } }, function(err, result) {
+                       { $set: { b : 1 } },
+                       function (err, result) {
       should.not.exist(err);
       result.result.n.should.eql(1);
       done();

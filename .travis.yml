@@ -4,8 +4,8 @@ services:
   - rabbitmq
 
 install:
-  - npm install -g mocha
+  - npm install -g mocha jshint
   - npm install
 
 script:
-  - mocha
+  - make test

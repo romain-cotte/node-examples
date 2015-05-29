@@ -1,4 +1,8 @@
 bluebird:
 	mocha test/bluebird.js
 
-.PHONY: bluebird
+test:
+	jshint --exclude-path .gitignore .
+	mocha
+
+.PHONY: bluebird test
