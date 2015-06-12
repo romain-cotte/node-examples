@@ -17,5 +17,19 @@ describe('Basics', function () {
     (null + 10).should.eql(10);
   });
 
+  var testCondition = function (condition) {
+    if (condition) {
+      return true;
+    }
+    return false;
+  };
+
+  it('if conditions', function () {
+    testCondition('str').should.be.true;
+    testCondition('').should.be.false;
+    testCondition(null).should.be.false;
+    testCondition(undefined).should.be.false;
+  });
+
 });
 
