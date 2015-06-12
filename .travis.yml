@@ -1,5 +1,5 @@
 before_install:
-  - export TZ=Paris
+  - export TZ=Europe/Paris
 
 services:
   - mongodb
