@@ -31,5 +31,19 @@ describe('Basics', function () {
     testCondition(undefined).should.be.false;
   });
 
+  it('object copy', function () {
+    var obj = { a: 1 };
+    var copy = obj;
+    copy.a = 2;
+    obj.a.should.eql(2);
+  });
+
+  it('array copy', function () {
+    var array = [ 0 ];
+    var copy = array;
+    copy.push(1);
+    array.length.should.eql(2);
+  });
+
 });
 

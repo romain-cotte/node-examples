@@ -1,3 +1,7 @@
+test:
+	jshint --exclude-path .gitignore .
+	mocha
+
 array:
 	mocha test/array.js
 
@@ -12,9 +16,5 @@ fs:
 
 time:
 	mocha test/time.js
-
-test:
-	jshint --exclude-path .gitignore .
-	mocha
 
 .PHONY: bluebird test
