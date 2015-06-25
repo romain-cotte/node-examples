@@ -36,6 +36,36 @@ describe('Redis', function () {
     });
   });
 
+  it('incr', function (done) {
+    var key = 'key0', value = 1;
+    async.waterfall([
+      function (next) {
+        client.set(key, value, next);
+      },
+      function (res, next) {
+        res.should.eql('OK');
+        client.incr(key, next);
+      }
+    ], function (err, result) {
+      should.not.exist(err);
+      result.should.eql(++value);
+      done();
+    });
+  });
+
+  it('first incr', function (done) {
+    var key = 'key1';
+    async.waterfall([
+      function (next) {
+        client.incr(key, next);
+      }
+    ], function (err, res) {
+      res.should.eql(1);
+      done();
+      // result now equals 'done'
+    });
+  });
+
   it('storing hash', function (done) {
     var key = 'key 0';
     async.waterfall([

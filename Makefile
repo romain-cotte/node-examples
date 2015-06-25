@@ -1,6 +1,9 @@
-test:
+test: redis-flush
 	jshint --exclude-path .gitignore .
 	mocha
+
+redis-flush:
+	redis-cli flushall
 
 array:
 	mocha test/array.js
