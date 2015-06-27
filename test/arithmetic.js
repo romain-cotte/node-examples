@@ -32,5 +32,17 @@ describe('Arithmetic', function () {
     (val1 & val2).should.eql(2); //        10
   });
 
+  it('or and have the same priority', function () {
+    var val1 = 22;             //    10110
+    var val2 = 10;             //     1010
+    var val3 =  4;             //      100
+    (val1 & val2 | val3)       // 11110 | 100
+      .should.eql(6);          //      110
+    (val2 | val3 & val1)       // 1110 & 10110
+      .should.eql(14);         //    10110
+    (val1 & val2 | val2)       //
+      .should.eql(10);         //     1010
+  });
+
 });
 

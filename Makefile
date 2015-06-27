@@ -2,13 +2,11 @@ test: redis-flush
 	jshint --exclude-path .gitignore .
 	mocha
 
-<<<<<<< Updated upstream
 redis-flush:
 	redis-cli flushall
-=======
+
 arithmetic:
 	mocha test/arithmetic.js
->>>>>>> Stashed changes
 
 array:
 	mocha test/array.js
