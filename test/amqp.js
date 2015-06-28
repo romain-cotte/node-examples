@@ -33,7 +33,7 @@ describe('Amqp lib', function () {
     it('publish and consume a message', function (done) {
       var message = 'message content';
       channel.sendToQueue(q, new Buffer(message));
-      channel.consume(q, function(msg) {
+      channel.consume(q, function (msg) {
         console.log('message content:', msg.content.toString());
         msg.content.toString().should.eql(message);
         channel.ack(msg); // Message will stay in the queue if not executed

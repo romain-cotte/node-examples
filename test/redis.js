@@ -112,7 +112,7 @@ describe('Redis', function () {
     });
   });
 
-  describe('storing nested object', function() {
+  describe('storing nested object', function () {
     var key = 'key B';
     var obj = {
       key1: 'value1',

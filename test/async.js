@@ -1,13 +1,13 @@
 'use strict';
 
-var async   = require('async');
-var should  = require('should');
+var async  = require('async');
+var should = require('should');
 
 /**
  * See https://github.com/caolan/async
  */
 describe('Async', function () {
-  it('waterfall', function(done) {
+  it('waterfall', function (done) {
     async.waterfall([
       function (next) {
         next(null, 'one', 'two');
@@ -24,7 +24,7 @@ describe('Async', function () {
     });
   });
 
-  it('parallel', function(done) {
+  it('parallel', function (done) {
     async.parallel([
       function (next) {
         next(null, 'one');
@@ -32,7 +32,7 @@ describe('Async', function () {
       function (next) {
         next(null, 'two');
       }
-    ], function(err, results) { // Optional
+    ], function (err, results) { // Optional
       var arg2 = results.pop();
       var arg1 = results.pop();
       arg1.should.eql('one');
@@ -41,7 +41,7 @@ describe('Async', function () {
     });
   });
 
-  it('series', function(done) {
+  it('series', function (done) {
     async.series([
       function (next) {
         next(null, 'one');
@@ -58,12 +58,12 @@ describe('Async', function () {
     });
   });
 
-  it('map', function(done) {
+  it('map', function (done) {
     var AsyncSquaringLibrary = {
       squareExponent: 2,
-      square: function(number, callback){
+      square: function (number, callback){
         var result = Math.pow(number, this.squareExponent);
-        setTimeout(function(){
+        setTimeout(function (){
           callback(null, result);
         }, 200);
       }
@@ -71,7 +71,7 @@ describe('Async', function () {
 
     async.map([1, 2, 3],
               AsyncSquaringLibrary.square.bind(AsyncSquaringLibrary),
-              function(err, result){
+              function (err, result){
       should.not.exist(err);
       result.should.eql([1, 4, 9]);
       done();
