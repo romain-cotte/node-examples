@@ -1,6 +1,6 @@
 node-examples
 =============
-[![Build Status](https://travis-ci.org/LilMeyer/node-examples.svg?branch=master)](https://travis-ci.org/LilMeyer/node-examples)
+[![Build Status](https://travis-ci.org/LilMeyer/node-examples.svg?branch=master)](https://travis-ci.org/LilMeyer/node-examples)https://david-dm.org/lilmeyer/node-examples.svg
 
 References
 ---

@@ -44,5 +44,12 @@ describe('Arithmetic', function () {
       .should.eql(10);         //     1010
   });
 
-});
+  it('^ operand', function () {
+    var val1 = 22;       //    10110
+    var val2 = 10;       //     1010
+    (val1 ^ val2)
+      .should.eql(28);   //    11100
+  });
 
+
+});
