@@ -20,6 +20,9 @@ bluebird:
 fs:
 	mocha test/fs.js
 
+redis:
+	mocha test/redis.js
+
 time:
 	mocha test/time.js
 

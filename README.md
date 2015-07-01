@@ -4,6 +4,7 @@ node-examples
 [![Dependency Status](https://david-dm.org/lilmeyer/node-examples.svg)](https://david-dm.org/lilmeyer/node-examples)
 [![GitHub tag](https://img.shields.io/github/tag/LilMeyer/node-examples.svg)]()
 
+
 References
 ---
 - [Amqplib](https://github.com/squaremo/amqp.node)
@@ -14,3 +15,4 @@ References
 - [Mongodb](https://github.com/mongodb/node-mongodb-native)
 - [Mongoose](http://mongoosejs.com/)
 - [Redis](https://github.com/mranney/node_redis)
+- [Node-inspector](https://github.com/node-inspector/node-inspector#how-do-i-debug-mocha-unit-tests)
