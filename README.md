@@ -4,6 +4,16 @@ node-examples
 [![Dependency Status](https://david-dm.org/lilmeyer/node-examples.svg)](https://david-dm.org/lilmeyer/node-examples)
 [![GitHub tag](https://img.shields.io/github/tag/LilMeyer/node-examples.svg)]()
 
+## Debug
+If you want to debug a test, install node-inspector
+```sh
+npm install -g node-inspector
+```
+And launch test with:
+
+```sh
+node-debug _mocha path/to/test
+```
 
 References
 ---
