@@ -53,10 +53,33 @@ describe('Redis', function () {
     });
   });
 
+  it('should delete a key', function (done) {
+    var key = 'key';
+    var value = 'value';
+    async.waterfall([
+      function (next) {
+        client.set(key, value, next);
+      },
+      function (res, next) {
+        client.del(key, next);
+      },
+      function (res, next) {
+        client.get(key, next);
+      }
+    ], function (err, res) {
+      (res === null).should.be.true;
+      done();
+      // result now equals 'done'
+    });
+  });
+
   it('first incr', function (done) {
     var key = 'key1';
     async.waterfall([
       function (next) {
+        client.del(key, next);
+      },
+      function (res, next) {
         client.incr(key, next);
       }
     ], function (err, res) {
