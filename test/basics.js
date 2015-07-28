@@ -1,5 +1,6 @@
 'use strict';
 
+var _      = require('lodash');
 var should = require('should');// jshint ignore:line
 
 describe('Basics', function () {
@@ -31,11 +32,18 @@ describe('Basics', function () {
     testCondition(undefined).should.be.false;
   });
 
-  it('object copy', function () {
+  it('object copy same reference: be very careful', function () {
     var obj = { a: 1 };
     var copy = obj;
     copy.a = 2;
     obj.a.should.eql(2);
+  });
+
+  it('object real copy', function () {
+    var obj = { a: 1 };
+    var copy = _.clone(obj);
+    copy.a = 2;
+    obj.a.should.eql(1);
   });
 
   it('array copy', function () {

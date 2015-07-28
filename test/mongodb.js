@@ -60,5 +60,22 @@ describe('Mongodb', function () {
       done();
     });
   });
+
+  it('findOne', function (done) {
+    collection.findOne({ }, function (err, res) {
+      should.not.exist(err);
+      res.should.have.property('a');
+      done();
+    });
+  });
+
+  it('find last one', function (done) {
+    collection.findOne({}, { sort: [['_id','desc']] }, function (err, res) {
+      should.not.exist(err);
+      res.should.have.property('a');
+      done();
+    });
+  });
+
 });
 
