@@ -1,6 +1,6 @@
 test: redis-flush
 	jshint --exclude-path .gitignore .
-	mocha
+	mocha --harmony
 
 redis-flush:
 	redis-cli flushall

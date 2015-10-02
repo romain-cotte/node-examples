@@ -1,14 +1,20 @@
-// 'use strict';
+'use strict';
 
-// var should = require('should');// jshint ignore:line
-// var Class1 = require('../classes/Class1');
+var should = require('should');// jshint ignore:line
 
-// describe('Ecmascript 6', function () {
+function* gen() {
+  yield* ['a', 'b', 'c'];
+}
 
-//   it('should test class', function () {
-//     var class1 = new Class1();
-//     console.log(class1.toString());
-//   });
+describe('Ecmascript 6', () => {
 
-// });
+  it('should test class', () => {
+    var g = gen();
+    g.next().should.eql({ value: 'a', done: false });
+    g.next().should.eql({ value: 'b', done: false });
+    g.next().should.eql({ value: 'c', done: false });
+    g.next().should.eql({ value: undefined, done: true });
+  });
+
+});
 
