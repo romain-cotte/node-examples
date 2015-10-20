@@ -2,7 +2,6 @@ node-examples
 =============
 [![Build Status](https://travis-ci.org/LilMeyer/node-examples.svg?branch=master)](https://travis-ci.org/LilMeyer/node-examples)
 [![Dependency Status](https://david-dm.org/lilmeyer/node-examples.svg)](https://david-dm.org/lilmeyer/node-examples)
-[![GitHub tag](https://img.shields.io/github/tag/LilMeyer/node-examples.svg)]()
 
 ## Debug
 If you want to debug a test, install node-inspector
