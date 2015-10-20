@@ -12,6 +12,7 @@ install:
 
 before_script:
   - mocha --version
+  - node --version
 
 script:
   - make test
