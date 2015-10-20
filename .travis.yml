@@ -10,5 +10,8 @@ install:
   - npm install -g mocha jshint
   - npm install
 
+before_script:
+  - mocha --version
+
 script:
   - make test
