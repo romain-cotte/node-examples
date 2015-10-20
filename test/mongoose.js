@@ -31,7 +31,8 @@ describe('Mongoose', function () {
       function (next) {
         user.save(next);
       }
-    ], function (err) {
+    ], function (err, result) {
+      (typeof result[1][0]._id).should.eql('object');
       (typeof user._id).should.eql('object');
       done(err);
     });
@@ -41,7 +42,7 @@ describe('Mongoose', function () {
     User.remove({}, function (err, status/*, status no more */) {
       should.not.exist(err);
       status.result.ok.should.eql(1);
-      status.result.n.should.eql(3);
+      status.result.n.should.eql(2);
       mongoose.disconnect();
       done();
     });
@@ -153,6 +154,16 @@ describe('Mongoose', function () {
 
     stream.on('close', function () {
       count.should.eql(3);
+      done();
+    });
+  });
+
+  it('remove', function (done) {
+    user.remove(function (err, res) {
+      should.not.exist(err);
+      res.firstname.should.eql(user.firstname);
+      res.lastname.should.eql(user.lastname);
+      res._id.should.eql(user._id);
       done();
     });
   });

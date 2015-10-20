@@ -1,7 +1,7 @@
 {
   "name": "node-examples",
   "author": "Romain Cotte",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "main": "main.js",
   "dependencies": {
     "amqplib": "^0.3.2",
