@@ -48,7 +48,8 @@ describe('Array', function () {
   });
 
   it('splice -1 1', function () {
-    var r = array.splice(-1, 1); // Warning with indexOf returns [16], array : [1, 2, 3, 15]
+    // Warning with indexOf returns [16], array : [1, 2, 3, 15]
+    var r = array.splice(-1, 1);
     r.should.eql([7]);
     array.should.eql([1, 2, 3, 4, 5, 6]);
   });
