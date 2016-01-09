@@ -207,6 +207,29 @@ describe('Redis', function () {
       });
     });
 
+    it('hmset does not overwrite other properties', function (done) {
+      var object = { startingProp1: 1, startingProp2: 2 };
+      async.waterfall([
+        function (next) {
+          client.del(key, next);
+        },
+        function (res, next) {
+          client.hmset(key, object, next);
+        },
+        function (result, next) {
+          result.should.equal('OK');
+          client.hmset(key, { nextProp1: 3, nextProp2: 4 }, next);
+        },
+        function (result, next) {
+          result.should.equal('OK');
+          client.hgetall(key, next);
+        }
+      ], function (err, result) {
+        console.log('result ---', result);
+        done(err);
+      });
+    });
+
   });
 
 });

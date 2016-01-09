@@ -134,9 +134,10 @@ describe('Mongoose', function () {
   });
 
   it('count', function (done) {
-    User.count({}, function (err, count/*, param === undefined */) {
+    User.count({}, function (err, count, param /* undefined */) {
       should.not.exist(err);
       count.should.eql(3);
+      should.not.exist(param);
       done();
     });
   });
