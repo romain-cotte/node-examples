@@ -225,7 +225,10 @@ describe('Redis', function () {
           client.hgetall(key, next);
         }
       ], function (err, result) {
-        console.log('result ---', result);
+        result.startingProp1.should.eql('1');
+        result.startingProp2.should.eql('2');
+        result.nextProp1.should.eql('3');
+        result.nextProp2.should.eql('4');
         done(err);
       });
     });

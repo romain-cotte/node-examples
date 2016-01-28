@@ -6,6 +6,8 @@ var ObjectId = mongoose.Types.ObjectId;
 var should   = require('should');
 
 var User = require('../models/user');
+mongoose.Promise = require('bluebird');
+
 
 describe('Mongoose', function () {
   var user;
@@ -167,6 +169,15 @@ describe('Mongoose', function () {
       res._id.should.eql(user._id);
       done();
     });
+  });
+
+  it('with promises', function (done) {
+    User.find()
+      .then(function (users) {
+        should.exist(users);
+        done();
+      })
+      .catch(function(err) {err});
   });
 
 });
