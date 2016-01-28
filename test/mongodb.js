@@ -1,5 +1,3 @@
-'use strict';
-
 var async   = require('async');
 var mongodb = require('mongodb');
 var should  = require('should');

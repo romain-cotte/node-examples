@@ -1,5 +1,3 @@
-'use strict';
-
 var crypto = require('crypto');
 var should = require('should'); // jshint ignore:line
 

@@ -1,5 +1,3 @@
-'use strict';
-
 class Class1 {
   constructor() {
     this.property1 = 1;

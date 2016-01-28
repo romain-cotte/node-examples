@@ -1,5 +1,3 @@
-'use strict';
-
 var async  = require('async'); // jshint ignore:line
 var fs     = require('fs');
 var should = require('should');

@@ -1,5 +1,3 @@
-'use strict';
-
 // var amqplib   = require('amqplib');
 var amqplib_c = require('amqplib/callback_api');
 var async     = require('async');

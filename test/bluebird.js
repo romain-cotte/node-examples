@@ -1,5 +1,3 @@
-'use strict';
-
 var Promise = require('bluebird');// jshint ignore:line
 
 var fs     = Promise.promisifyAll(require('fs'));
