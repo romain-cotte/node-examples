@@ -8,19 +8,19 @@ var q = 'tasks';
 /**
  * See https://github.com/squaremo/amqp.node
  */
-describe('Amqp lib', function () {
-  describe('callback api', function () {
+describe('Amqp lib', () => {
+  describe('callback api', () => {
     var connection, channel;
-    before(function (done) {
+    before((done) => {
       async.waterfall([
-        function (next) {
+        (next) => {
           amqplib_c.connect('amqp://localhost', next);
         },
-        function (conn, next) {
+        (conn, next) => {
           connection = conn;
           connection.createChannel(next);
         }
-      ], function (err, ch) {
+      ], (err, ch) => {
         should.not.exist(err);
         channel = ch;
         channel.assertQueue(q);
@@ -28,10 +28,10 @@ describe('Amqp lib', function () {
       });
     });
 
-    it('publish and consume a message', function (done) {
+    it('publish and consume a message', (done) => {
       var message = 'message content';
       channel.sendToQueue(q, new Buffer(message));
-      channel.consume(q, function (msg) {
+      channel.consume(q, (msg) => {
         console.log('message content:', msg.content.toString());
         msg.content.toString().should.eql(message);
         channel.ack(msg); // Message will stay in the queue if not executed

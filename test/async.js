@@ -4,10 +4,10 @@ var should = require('should');
 /**
  * See https://github.com/caolan/async
  */
-describe('Async', function () {
-  it('waterfall', function (done) {
+describe('Async', () => {
+  it('waterfall', (done) => {
     async.waterfall([
-      function (next) {
+      (next) => {
         next(null, 'one', 'two');
       },
       function (arg1, arg2, next) {
@@ -15,19 +15,19 @@ describe('Async', function () {
         arg2.should.eql('two');
         next(null, 'done');
       }
-    ], function (err, result) {
+    ], (err, result) =>  {
       should.not.exist(err);
       result.should.eql('done');
       done();
     });
   });
 
-  it('parallel', function (done) {
+  it('parallel', (done) => {
     async.parallel([
-      function (next) {
+      (next) => {
         next(null, 'one');
       },
-      function (next) {
+      (next) => {
         next(null, 'two');
       }
     ], function (err, results) { // Optional
@@ -39,12 +39,12 @@ describe('Async', function () {
     });
   });
 
-  it('series', function (done) {
+  it('series', (done) => {
     async.series([
-      function (next) {
+      (next) => {
         next(null, 'one');
       },
-      function (next) {
+      (next) => {
         next(null, 'two');
       }
     ], function (err, results) {
@@ -56,12 +56,12 @@ describe('Async', function () {
     });
   });
 
-  it('map', function (done) {
+  it('map', (done) => {
     var AsyncSquaringLibrary = {
       squareExponent: 2,
       square: function (number, callback){
         var result = Math.pow(number, this.squareExponent);
-        setTimeout(function (){
+        setTimeout(() => {
           callback(null, result);
         }, 200);
       }
@@ -69,16 +69,16 @@ describe('Async', function () {
 
     async.map([1, 2, 3],
               AsyncSquaringLibrary.square.bind(AsyncSquaringLibrary),
-              function (err, result){
+              (err, result) => {
       should.not.exist(err);
       result.should.eql([1, 4, 9]);
       done();
     });
   });
 
-  it('error', function (done) {
+  it('error', (done) => {
     async.waterfall([
-      function (next) {
+      (next) => {
         // notDefined.id;
         /* Throw an error here */
         next(null, 'result');
@@ -89,13 +89,13 @@ describe('Async', function () {
     });
   });
 
-  it('async process.nextTick', function (done) {
+  it('async process.nextTick', (done) => {
     async.series([
-      function (next) {
+      (next) => {
         console.log(0);
         process.nextTick(next);
       },
-      function (next) {
+      (next) => {
         console.log(1);
         next(null);
       }

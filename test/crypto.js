@@ -1,9 +1,9 @@
 var crypto = require('crypto');
 var should = require('should'); // jshint ignore:line
 
-describe('crypto', function () {
+describe('crypto', () => {
 
-  it('md5 encryption', function () {
+  it('md5 encryption', () => {
     var data = '123456';
     crypto.createHash('md5')
           .update(data)

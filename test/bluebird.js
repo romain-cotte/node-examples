@@ -6,18 +6,18 @@ var should = require('should');// jshint ignore:line
 /**
  * See https://github.com/petkaantonov/bluebird
  */
-describe('Bluebird', function () {
-  it('should read package.json', function (done) {
+describe('Bluebird', () => {
+  it('should read package.json', (done) => {
     fs.readFileAsync('package.json')
       .then(JSON.parse)
-      .then(function (json) {
+      .then((json) => {
         json.author.should.eql('Romain Cotte');
         done();
       })
-      .catch(SyntaxError, function (/*e*/) {
+      .catch(SyntaxError,  (/*e*/) => {
         console.error('file contains invalid json');
       })
-      .catch(Promise.OperationalError, function (e) {
+      .catch(Promise.OperationalError, (e) => {
         console.error('unable to read file, because: ', e.message);
       });
   });

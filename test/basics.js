@@ -1,9 +1,9 @@
 var _      = require('lodash');
 var should = require('should');// jshint ignore:line
 
-describe('Basics', function () {
+describe('Basics', () => {
 
-  it('comparisons', function () {
+  it('comparisons', () => {
     /* jshint ignore:start */
     (0 == false).should.be.true;
     (0 === false).should.be.false;
@@ -12,7 +12,7 @@ describe('Basics', function () {
     /* jshint ignore:end */
   });
 
-  it('additions', function () {
+  it('additions', () => {
     (null + 10).should.eql(10);
   });
 
@@ -23,28 +23,28 @@ describe('Basics', function () {
     return false;
   };
 
-  it('if conditions', function () {
+  it('if conditions', () => {
     testCondition('str').should.be.true;
     testCondition('').should.be.false;
     testCondition(null).should.be.false;
     testCondition(undefined).should.be.false;
   });
 
-  it('object copy same reference: be very careful', function () {
+  it('object copy same reference: be very careful', () => {
     var obj = { a: 1 };
     var copy = obj;
     copy.a = 2;
     obj.a.should.eql(2);
   });
 
-  it('object real copy', function () {
+  it('object real copy', () => {
     var obj = { a: 1 };
     var copy = _.clone(obj);
     copy.a = 2;
     obj.a.should.eql(1);
   });
 
-  it('array copy', function () {
+  it('array copy', () => {
     var array = [ 0 ];
     var copy = array;
     copy.push(1);

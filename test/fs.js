@@ -2,10 +2,10 @@ var async  = require('async'); // jshint ignore:line
 var fs     = require('fs');
 var should = require('should');
 
-describe('fs', function () {
+describe('fs', () => {
 
-  it('writeFile', function (done) {
-    fs.writeFile('test/tmp/fs-writeFile.txt', 'Hello Node', function (err) {
+  it('writeFile', (done) => {
+    fs.writeFile('test/tmp/fs-writeFile.txt', 'Hello Node', (err) => {
       should.not.exist(err);
       done();
     });

@@ -4,10 +4,10 @@ var should  = require('should');
 
 var url = 'mongodb://localhost:27017/node-examples';
 
-describe('Mongodb', function () {
+describe('Mongodb', () => {
   var db, collection;
 
-  before(function (done) {
+  before((done) => {
     async.waterfall([
       function (next) {
         /* Database connection */
@@ -24,12 +24,12 @@ describe('Mongodb', function () {
     });
   });
 
-  after(function (done) {
+  after((done) => {
     db.close();
     done();
   });
 
-  it('should insert 3 documents into the document collection', function (done) {
+  it('should insert 3 documents into the document collection', (done) => {
     collection
       .insert([
         { a : 1 }, { a : 2 }, { a : 3 }
@@ -41,7 +41,7 @@ describe('Mongodb', function () {
       });
   });
 
-  it('should retrieve documents of document collection', function (done) {
+  it('should retrieve documents of document collection', (done) => {
     collection.find({ a: 1 }).toArray(function (err, documents) {
       should.not.exist(err);
       documents.length.should.eql(1);
@@ -49,7 +49,7 @@ describe('Mongodb', function () {
     });
   });
 
-  it('should update a document', function (done) {
+  it('should update a document', (done) => {
      collection.update({ a : 2 },
                        { $set: { b : 1 } },
                        function (err, result) {
@@ -59,16 +59,16 @@ describe('Mongodb', function () {
     });
   });
 
-  it('findOne', function (done) {
-    collection.findOne({ }, function (err, res) {
+  it('findOne', (done) => {
+    collection.findOne({ }, (err, res) => {
       should.not.exist(err);
       res.should.have.property('a');
       done();
     });
   });
 
-  it('find last one', function (done) {
-    collection.findOne({}, { sort: [['_id','desc']] }, function (err, res) {
+  it('find last one', (done) => {
+    collection.findOne({}, { sort: [['_id','desc']] }, (err, res) => {
       should.not.exist(err);
       res.should.have.property('a');
       done();
