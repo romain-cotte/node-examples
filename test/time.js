@@ -1,9 +1,9 @@
 const should = require('should'); // jshint ignore:line
 const moment = require('moment');
 
-describe('Time', function () {
+describe('Time', () => {
   const date = new Date(2015, 5, 1, 15, 10, 45, 153);
-  it('string', function () {
+  it('string', () => {
     /**
      * Adjust format: see https://docs.adjust.com/en/event-tracking/#reference-server-side-event-tracking
      */

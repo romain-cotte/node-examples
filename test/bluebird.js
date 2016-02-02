@@ -7,7 +7,7 @@ var should = require('should');// jshint ignore:line
  * See https://github.com/petkaantonov/bluebird
  */
 describe('Bluebird', () => {
-  it('should read package.json', (done) => {
+  it('should read package.json', done => {
     fs.readFileAsync('package.json')
       .then(JSON.parse)
       .then((json) => {
@@ -17,7 +17,7 @@ describe('Bluebird', () => {
       .catch(SyntaxError,  (/*e*/) => {
         console.error('file contains invalid json');
       })
-      .catch(Promise.OperationalError, (e) => {
+      .catch(Promise.OperationalError, e => {
         console.error('unable to read file, because: ', e.message);
       });
   });

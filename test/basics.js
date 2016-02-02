@@ -16,7 +16,7 @@ describe('Basics', () => {
     (null + 10).should.eql(10);
   });
 
-  var testCondition = function (condition) {
+  var testCondition = (condition) => {
     if (condition) {
       return true;
     }

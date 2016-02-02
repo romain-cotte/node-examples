@@ -4,8 +4,8 @@ var should = require('should');
 
 describe('fs', () => {
 
-  it('writeFile', (done) => {
-    fs.writeFile('test/tmp/fs-writeFile.txt', 'Hello Node', (err) => {
+  it('writeFile', done => {
+    fs.writeFile('test/tmp/fs-writeFile.txt', 'Hello Node', err => {
       should.not.exist(err);
       done();
     });

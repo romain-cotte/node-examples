@@ -17,7 +17,8 @@ describe('Mongoose', function () {
       city: 'Paris'
     }
   };
-  before(function (done) {
+
+  before(done => {
     /**
      * see http://mongoosejs.com/docs/connections.html
      */
@@ -38,7 +39,7 @@ describe('Mongoose', function () {
     });
   });
 
-  after(function (done) {
+  after(done => {
     User.remove({}, function (err, status/*, status no more */) {
       should.not.exist(err);
       status.result.ok.should.eql(1);
@@ -48,14 +49,14 @@ describe('Mongoose', function () {
     });
   });
 
-  it('create an ObjectId ', function (done) {
+  it('create an ObjectId ', done => {
     var id = ObjectId.createPk();
     // createPk return an object
     (typeof id).should.eql('object');
     done();
   });
 
-  it('findOne with a bad ObjectId', function (done) {
+  it('findOne with a bad ObjectId', done => {
     User.findOne({ _id: 'badObjectId' }, function (err/*, res*/) {
       err.message.should.eql('Cast to ObjectId failed for value "badObjectId" at path "_id"');
       err.name.should.eql('CastError');
@@ -66,7 +67,7 @@ describe('Mongoose', function () {
     });
   });
 
-  it('findOne with a wrong ObjectId', function (done) {
+  it('findOne with a wrong ObjectId', done => {
     User.findOne({ _id: ObjectId.createPk() }, function (err, res) {
       should.not.exist(err);
       should.not.exist(res);/* res === null */
@@ -74,7 +75,7 @@ describe('Mongoose', function () {
     });
   });
 
-  it('find with a wrong ObjectId', function (done) {
+  it('find with a wrong ObjectId', done => {
     User.find({ _id: ObjectId.createPk() }, function (err, res) {
       should.not.exist(err);
       res.should.eql([]);
@@ -82,7 +83,7 @@ describe('Mongoose', function () {
     });
   });
 
-  it('findOne', function (done) {
+  it('findOne', done => {
     User.findOne({ _id: user._id }, function (err, res) {
       should.not.exist(err);
       res.firstname.should.eql(userContent.firstname);
@@ -93,7 +94,7 @@ describe('Mongoose', function () {
     });
   });
 
-  it('findOne - with a string instead of a ObjectId => it works !', function (done) {
+  it('findOne - with a string instead of a ObjectId => it works !', done => {
     User.findOne({ _id: user._id.toString() }, function (err, res) {
       should.not.exist(err);
       res.firstname.should.eql(userContent.firstname);
@@ -102,7 +103,7 @@ describe('Mongoose', function () {
     });
   });
 
-  it('save', function (done) {
+  it('save', done => {
     var user = new User(userContent);
     user.save(function (err, res, nbSaved) {
       should.not.exist(err);
@@ -112,7 +113,7 @@ describe('Mongoose', function () {
     });
   });
 
-  it('save a user with a specific _id', function (done) {
+  it('save a user with a specific _id', done => {
     userContent._id = ObjectId.createPk();
     var user = new User(userContent);
     user.save(function (err, res/*, nbSaved*/) {
@@ -122,7 +123,7 @@ describe('Mongoose', function () {
     });
   });
 
-  it('update', function (done) {
+  it('update', done => {
     User.update({ _id: user._id },
                 { firstname: 'newFirstname' },
                 function (err, status /*, no more status here */ ) {
@@ -133,7 +134,7 @@ describe('Mongoose', function () {
     });
   });
 
-  it('count', function (done) {
+  it('count', done => {
     User.count({}, function (err, count, param /* undefined */) {
       should.not.exist(err);
       count.should.eql(3);
@@ -142,7 +143,7 @@ describe('Mongoose', function () {
     });
   });
 
-  it('stream', function (done) {
+  it('stream', done => {
     var stream = User.find().stream();
     var count = 0;
     stream.on('data', function (/*doc*/) {
@@ -159,7 +160,7 @@ describe('Mongoose', function () {
     });
   });
 
-  it('remove', function (done) {
+  it('remove', done => {
     user.remove(function (err, res) {
       should.not.exist(err);
       res.firstname.should.eql(user.firstname);

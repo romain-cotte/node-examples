@@ -6,7 +6,7 @@ const should = require('should');
 
 describe('Redis', () => {
   let client;
-  before((done) => {
+  before(done => {
     client = redis.createClient();
     client.on('error', function (err) {
       console.log('Error ' + err);
@@ -14,12 +14,12 @@ describe('Redis', () => {
     done();
   });
 
-  after((done) => {
+  after(done => {
     client.quit();
     done();
   });
 
-  it('set - get', (done) => {
+  it('set - get', done => {
     const key = 'key', value = 'value';
     async.waterfall([
       function (next) {
@@ -36,7 +36,7 @@ describe('Redis', () => {
     });
   });
 
-  it('incr', (done) => {
+  it('incr', done => {
     let key = 'key0', value = 1;
     async.waterfall([
       function (next) {
@@ -53,7 +53,7 @@ describe('Redis', () => {
     });
   });
 
-  it('should delete a key', (done) => {
+  it('should delete a key', done => {
     const key = 'key';
     const value = 'value';
     async.waterfall([
@@ -73,7 +73,7 @@ describe('Redis', () => {
     });
   });
 
-  it('first incr', (done) => {
+  it('first incr', done => {
     const key = 'key1';
     async.waterfall([
       function (next) {
@@ -89,7 +89,7 @@ describe('Redis', () => {
     });
   });
 
-  it('storing hash', (done) => {
+  it('storing hash', done => {
     const key = 'key 0';
     async.waterfall([
       function (next) {
@@ -113,7 +113,7 @@ describe('Redis', () => {
     });
   });
 
-  it('storing hash', (done) => {
+  it('storing hash', done => {
     const key = 'key A';
     const obj = {
       property1: 'value1',
@@ -143,7 +143,7 @@ describe('Redis', () => {
       key3: { subKey: new Date().getTime() }
     };
 
-    it('can\'t storing nested objects', (done) => {
+    it('can\'t storing nested objects', done => {
       async.waterfall([
         function (next) {
           client.del(key, next);
@@ -164,7 +164,7 @@ describe('Redis', () => {
       });
     });
 
-    it('storing nested objects in a string', (done) => {
+    it('storing nested objects in a string', done => {
       const prop = 'prop';
       async.waterfall([
         function (next) {
@@ -187,7 +187,7 @@ describe('Redis', () => {
       });
     });
 
-    it('storing nested objects in a string--', (done) => {
+    it('storing nested objects in a string--', done => {
       const object = { id1: JSON.stringify(obj) };
       async.waterfall([
         function (next) {
@@ -207,7 +207,7 @@ describe('Redis', () => {
       });
     });
 
-    it('hmset does not overwrite other properties', (done) => {
+    it('hmset does not overwrite other properties', done => {
       const object = { startingProp1: 1, startingProp2: 2 };
       async.waterfall([
         function (next) {

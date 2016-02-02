@@ -59,7 +59,7 @@ describe('Async', () => {
   it('map', done => {
     var AsyncSquaringLibrary = {
       squareExponent: 2,
-      square: function (number, callback){
+      square: function (number, callback) {
         var result = Math.pow(number, this.squareExponent);
         setTimeout(() => {
           callback(null, result);
