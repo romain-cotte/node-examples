@@ -1,7 +1,7 @@
 const amqplib   = require('amqplib');
 var amqplib_c = require('amqplib/callback_api');
 var async     = require('async');
-var should    = require('should');
+import should from 'should';
 
 var q = 'tasks';
 

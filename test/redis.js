@@ -8,7 +8,7 @@ describe('Redis', () => {
   let client;
   before(done => {
     client = redis.createClient();
-    client.on('error', function (err) {
+    client.on('error', (err) => {
       console.log('Error ' + err);
     });
     done();
@@ -22,14 +22,14 @@ describe('Redis', () => {
   it('set - get', done => {
     const key = 'key', value = 'value';
     async.waterfall([
-      function (next) {
+      (next) => {
         client.set(key, value, next);
       },
-      function (res, next) {
+      (res, next) => {
         res.should.eql('OK');
         client.get(key, next);
       }
-    ], function (err, result) {
+    ], (err, result) => {
       should.not.exist(err);
       result.should.eql(value);
       done();
@@ -39,14 +39,14 @@ describe('Redis', () => {
   it('incr', done => {
     let key = 'key0', value = 1;
     async.waterfall([
-      function (next) {
+      (next) => {
         client.set(key, value, next);
       },
-      function (res, next) {
+      (res, next) => {
         res.should.eql('OK');
         client.incr(key, next);
       }
-    ], function (err, result) {
+    ], (err, result) => {
       should.not.exist(err);
       result.should.eql(++value);
       done();
@@ -57,16 +57,16 @@ describe('Redis', () => {
     const key = 'key';
     const value = 'value';
     async.waterfall([
-      function (next) {
+      (next) => {
         client.set(key, value, next);
       },
-      function (res, next) {
+      (res, next) => {
         client.del(key, next);
       },
-      function (res, next) {
+      (res, next) => {
         client.get(key, next);
       }
-    ], function (err, res) {
+    ], (err, res) => {
       (res === null).should.be.true;
       done();
       // result now equals 'done'
@@ -76,13 +76,13 @@ describe('Redis', () => {
   it('first incr', done => {
     const key = 'key1';
     async.waterfall([
-      function (next) {
+      (next) => {
         client.del(key, next);
       },
-      function (res, next) {
+      (res, next) => {
         client.incr(key, next);
       }
-    ], function (err, res) {
+    ], (err, res) => {
       res.should.eql(1);
       done();
       // result now equals 'done'
@@ -92,21 +92,21 @@ describe('Redis', () => {
   it('storing hash', done => {
     const key = 'key 0';
     async.waterfall([
-      function (next) {
+      (next) => {
         client.del(key, next);
       },
-      function (r, next) {
+      (r, next) => {
         client.hset(key, 'property', 'value', next);
       },
-      function (res, next) {
+      (res, next) => {
         res.should.eql(1);
         client.hkeys(key, next);
       },
-      function (res, next) {
+      (res, next) => {
         res.should.eql(['property']);
         client.hgetall(key, next);
       },
-    ], function (err, result) {
+    ], (err, result) => {
       should.not.exist(err);
       result.should.eql({ property: 'value' });
       done();
@@ -121,14 +121,14 @@ describe('Redis', () => {
       property3: 'value3'
     };
     async.waterfall([
-      function (next) {
+      (next) => {
         client.hmset(key, 'property1', 'value1',
          'property2', 'value2', 'property3', 'value3', next);
       },
-      function (result, next) {
+      (result, next) => {
         client.hgetall(key, next);
       }
-    ], function (err, result) {
+    ], (err, result) => {
       should.not.exist(err);
       result.should.eql(obj);
       done();
@@ -145,18 +145,18 @@ describe('Redis', () => {
 
     it('can\'t storing nested objects', done => {
       async.waterfall([
-        function (next) {
+        (next) => {
           client.del(key, next);
         },
-        function (result/* type number */, next) {
+        (result/* type number */, next) => {
           [ 0, 1 ].indexOf(result).should.be.above(-1);
           client.hmset(key, obj, next);
         },
-        function (result, next) {
+        (result, next) => {
           result.should.equal('OK');
           client.hgetall(key, next);
         },
-      ], function (err, result) {
+      ], (err, result) => {
         should.not.exist(err);
         result.key1.should.eql(obj.key1);
         /* result.key2.subKey is undefined */
@@ -167,17 +167,17 @@ describe('Redis', () => {
     it('storing nested objects in a string', done => {
       const prop = 'prop';
       async.waterfall([
-        function (next) {
+        (next) => {
           client.del(key, next);
         },
-        function (result, next) {
+        (result, next) => {
           client.hset(key, prop, JSON.stringify(obj), next);
         },
-        function (result, next) {
+        (result, next) => {
           result.should.equal(1);
           client.hget(key, prop, next);
         },
-      ], function (err, result) {
+      ], (err, result) => {
         should.not.exist(err);
         result.should.eql(JSON.stringify(obj));
         const r = JSON.parse(result);
@@ -190,17 +190,17 @@ describe('Redis', () => {
     it('storing nested objects in a string--', done => {
       const object = { id1: JSON.stringify(obj) };
       async.waterfall([
-        function (next) {
+        (next) => {
           client.del(key, next);
         },
-        function (result, next) {
+        (result, next) => {
           client.hmset(key, object, next);
         },
-        function (result, next) {
+        (result, next) => {
           result.should.equal('OK');
           client.hgetall(key, next);
         },
-      ], function (err, result) {
+      ], (err, result) => {
         should.not.exist(err);
         result.should.eql(object);
         done();
@@ -210,21 +210,21 @@ describe('Redis', () => {
     it('hmset does not overwrite other properties', done => {
       const object = { startingProp1: 1, startingProp2: 2 };
       async.waterfall([
-        function (next) {
+        (next) => {
           client.del(key, next);
         },
-        function (res, next) {
+        (res, next) => {
           client.hmset(key, object, next);
         },
-        function (result, next) {
+        (result, next) => {
           result.should.equal('OK');
           client.hmset(key, { nextProp1: 3, nextProp2: 4 }, next);
         },
-        function (result, next) {
+        (result, next) => {
           result.should.equal('OK');
           client.hgetall(key, next);
         }
-      ], function (err, result) {
+      ], (err, result) => {
         result.startingProp1.should.eql('1');
         result.startingProp2.should.eql('2');
         result.nextProp1.should.eql('3');

@@ -1,6 +1,6 @@
 
 test: redis-flush
-	mocha --harmony -b
+	mocha --compilers js:babel-core/register --require babel-polyfill
 
 redis-flush:
 	redis-cli flushall
