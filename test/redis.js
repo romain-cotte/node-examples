@@ -1,10 +1,12 @@
-var async  = require('async');
-var redis  = require('redis');
-var should = require('should');
+'use strict';
 
-describe('Redis', function () {
-  var client;
-  before(function (done) {
+const async  = require('async');
+const redis  = require('redis');
+const should = require('should');
+
+describe('Redis', () => {
+  let client;
+  before((done) => {
     client = redis.createClient();
     client.on('error', function (err) {
       console.log('Error ' + err);
@@ -12,13 +14,13 @@ describe('Redis', function () {
     done();
   });
 
-  after(function (done) {
+  after((done) => {
     client.quit();
     done();
   });
 
-  it('set - get', function (done) {
-    var key = 'key', value = 'value';
+  it('set - get', (done) => {
+    const key = 'key', value = 'value';
     async.waterfall([
       function (next) {
         client.set(key, value, next);
@@ -34,8 +36,8 @@ describe('Redis', function () {
     });
   });
 
-  it('incr', function (done) {
-    var key = 'key0', value = 1;
+  it('incr', (done) => {
+    let key = 'key0', value = 1;
     async.waterfall([
       function (next) {
         client.set(key, value, next);
@@ -51,9 +53,9 @@ describe('Redis', function () {
     });
   });
 
-  it('should delete a key', function (done) {
-    var key = 'key';
-    var value = 'value';
+  it('should delete a key', (done) => {
+    const key = 'key';
+    const value = 'value';
     async.waterfall([
       function (next) {
         client.set(key, value, next);
@@ -71,8 +73,8 @@ describe('Redis', function () {
     });
   });
 
-  it('first incr', function (done) {
-    var key = 'key1';
+  it('first incr', (done) => {
+    const key = 'key1';
     async.waterfall([
       function (next) {
         client.del(key, next);
@@ -87,8 +89,8 @@ describe('Redis', function () {
     });
   });
 
-  it('storing hash', function (done) {
-    var key = 'key 0';
+  it('storing hash', (done) => {
+    const key = 'key 0';
     async.waterfall([
       function (next) {
         client.del(key, next);
@@ -111,9 +113,9 @@ describe('Redis', function () {
     });
   });
 
-  it('storing hash', function (done) {
-    var key = 'key A';
-    var obj = {
+  it('storing hash', (done) => {
+    const key = 'key A';
+    const obj = {
       property1: 'value1',
       property2: 'value2',
       property3: 'value3'
@@ -133,15 +135,15 @@ describe('Redis', function () {
     });
   });
 
-  describe('storing nested object', function () {
-    var key = 'key B';
-    var obj = {
+  describe('storing nested object', () => {
+    const key = 'key B';
+    const obj = {
       key1: 'value1',
       key2: { subKey: 'value2' },
       key3: { subKey: new Date().getTime() }
     };
 
-    it('can\'t storing nested objects', function (done) {
+    it('can\'t storing nested objects', (done) => {
       async.waterfall([
         function (next) {
           client.del(key, next);
@@ -162,8 +164,8 @@ describe('Redis', function () {
       });
     });
 
-    it('storing nested objects in a string', function (done) {
-      var prop = 'prop';
+    it('storing nested objects in a string', (done) => {
+      const prop = 'prop';
       async.waterfall([
         function (next) {
           client.del(key, next);
@@ -178,15 +180,15 @@ describe('Redis', function () {
       ], function (err, result) {
         should.not.exist(err);
         result.should.eql(JSON.stringify(obj));
-        var r = JSON.parse(result);
+        const r = JSON.parse(result);
         /* Dates have to be converted */
         r.key3.subkey = new Date(parseFloat(r.key3.subKey));
         done();
       });
     });
 
-    it('storing nested objects in a string--', function (done) {
-      var object = { id1: JSON.stringify(obj) };
+    it('storing nested objects in a string--', (done) => {
+      const object = { id1: JSON.stringify(obj) };
       async.waterfall([
         function (next) {
           client.del(key, next);
@@ -205,8 +207,8 @@ describe('Redis', function () {
       });
     });
 
-    it('hmset does not overwrite other properties', function (done) {
-      var object = { startingProp1: 1, startingProp2: 2 };
+    it('hmset does not overwrite other properties', (done) => {
+      const object = { startingProp1: 1, startingProp2: 2 };
       async.waterfall([
         function (next) {
           client.del(key, next);

@@ -169,13 +169,13 @@ describe('Mongoose', function () {
     });
   });
 
-  it('with promises', function (done) {
+  it('with promises', (done) => {
     User.find()
-      .then(function (users) {
+      .then((users) => {
         should.exist(users);
         done();
       })
-      .catch(function(err) {err});
+      .catch(done);
   });
 
 });

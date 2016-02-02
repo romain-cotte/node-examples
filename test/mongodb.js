@@ -19,9 +19,7 @@ describe('Mongodb', () => {
         /* Remove all documents for tests */
         collection.remove({}, next);
       }
-    ], function (err) {
-      done(err);
-    });
+    ], done);
   });
 
   after((done) => {
