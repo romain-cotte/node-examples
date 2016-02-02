@@ -5,12 +5,12 @@ var should = require('should');
  * See https://github.com/caolan/async
  */
 describe('Async', () => {
-  it('waterfall', (done) => {
+  it('waterfall', done => {
     async.waterfall([
       (next) => {
         next(null, 'one', 'two');
       },
-      function (arg1, arg2, next) {
+      (arg1, arg2, next) => {
         arg1.should.eql('one');
         arg2.should.eql('two');
         next(null, 'done');
@@ -22,7 +22,7 @@ describe('Async', () => {
     });
   });
 
-  it('parallel', (done) => {
+  it('parallel', done => {
     async.parallel([
       (next) => {
         next(null, 'one');
@@ -30,7 +30,7 @@ describe('Async', () => {
       (next) => {
         next(null, 'two');
       }
-    ], function (err, results) { // Optional
+    ], (err, results) => { // Optional
       var arg2 = results.pop();
       var arg1 = results.pop();
       arg1.should.eql('one');
@@ -39,7 +39,7 @@ describe('Async', () => {
     });
   });
 
-  it('series', (done) => {
+  it('series', done => {
     async.series([
       (next) => {
         next(null, 'one');
@@ -47,7 +47,7 @@ describe('Async', () => {
       (next) => {
         next(null, 'two');
       }
-    ], function (err, results) {
+    ], (err, results) => {
       var arg2 = results.pop();
       var arg1 = results.pop();
       arg1.should.eql('one');
@@ -56,7 +56,7 @@ describe('Async', () => {
     });
   });
 
-  it('map', (done) => {
+  it('map', done => {
     var AsyncSquaringLibrary = {
       squareExponent: 2,
       square: function (number, callback){
@@ -76,20 +76,20 @@ describe('Async', () => {
     });
   });
 
-  it('error', (done) => {
+  it('error', done => {
     async.waterfall([
       (next) => {
         // notDefined.id;
         /* Throw an error here */
         next(null, 'result');
       },
-    ], function (err/*, result === 'result' */) {
+    ], (err/*, result === 'result' */) => {
       should.not.exist(err);
       done();
     });
   });
 
-  it('async process.nextTick', (done) => {
+  it('async process.nextTick', done => {
     async.series([
       (next) => {
         console.log(0);
@@ -99,7 +99,7 @@ describe('Async', () => {
         console.log(1);
         next(null);
       }
-    ], function (err) {
+    ], (err) => {
       should.not.exist(err);
       done();
     });
