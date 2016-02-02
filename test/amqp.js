@@ -1,4 +1,4 @@
-// var amqplib   = require('amqplib');
+const amqplib   = require('amqplib');
 var amqplib_c = require('amqplib/callback_api');
 var async     = require('async');
 var should    = require('should');
@@ -9,23 +9,21 @@ var q = 'tasks';
  * See https://github.com/squaremo/amqp.node
  */
 describe('Amqp lib', () => {
+
   describe('callback api', () => {
     var connection, channel;
-    before((done) => {
-      async.waterfall([
-        (next) => {
-          amqplib_c.connect('amqp://localhost', next);
-        },
-        (conn, next) => {
+    before(done => {
+      amqplib.connect('amqp://localhost')
+        .then(conn => {
           connection = conn;
-          connection.createChannel(next);
-        }
-      ], (err, ch) => {
-        should.not.exist(err);
-        channel = ch;
-        channel.assertQueue(q);
-        done();
-      });
+          return conn.createChannel()
+        })
+        .then(chan => {
+          channel = chan;
+          channel.assertQueue(q);
+          should.exist(connection);
+          done();
+        });
     });
 
     it('publish and consume a message', (done) => {
@@ -41,3 +39,4 @@ describe('Amqp lib', () => {
 
   });
 });
+
