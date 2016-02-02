@@ -3,10 +3,10 @@ import async from 'async';
 import mongoose from 'mongoose';
 import should from 'should';
 import User from '../models/user';
+import { Promise as qPromise } from 'q';
 
+mongoose.Promise = qPromise
 const ObjectId = mongoose.Types.ObjectId;
-
-mongoose.Promise = require('q').Promise
 
 describe('Mongoose', function () {
   let user;

@@ -1,6 +1,7 @@
 import Promise from 'bluebird';
-var fs = Promise.promisifyAll(require('fs'));
+import _fs from 'fs';
 import should from 'should';
+const fs = Promise.promisifyAll(_fs);
 
 /**
  * See https://github.com/petkaantonov/bluebird
@@ -13,7 +14,7 @@ describe('Bluebird', () => {
         json.author.should.eql('Romain Cotte');
         done();
       })
-      .catch(SyntaxError,  (/*e*/) => {
+      .catch(SyntaxError,  () => {
         console.error('file contains invalid json');
       })
       .catch(Promise.OperationalError, e => {
