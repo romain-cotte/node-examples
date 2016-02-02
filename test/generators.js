@@ -1,4 +1,4 @@
-var should = require('should');// jshint ignore:line
+import should from 'should';
 
 function* gen() {
   yield* ['a', 'b', 'c'];

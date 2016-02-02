@@ -1,10 +1,11 @@
 'use strict';
-const async    = require('async');
-const mongoose = require('mongoose');
-const ObjectId = mongoose.Types.ObjectId;
-const should   = require('should');
+import async from 'async';
+import mongoose from 'mongoose';
+import should from 'should';
+import User from '../models/user';
 
-let User = require('../models/user');
+const ObjectId = mongoose.Types.ObjectId;
+
 mongoose.Promise = require('q').Promise
 
 describe('Mongoose', function () {

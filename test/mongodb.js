@@ -1,6 +1,6 @@
-var async   = require('async');
-var mongodb = require('mongodb');
-var should  = require('should');
+import async from 'async';
+import mongodb from 'mongodb';
+import should from 'should';
 
 var url = 'mongodb://localhost:27017/node-examples';
 

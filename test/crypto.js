@@ -1,5 +1,5 @@
-var crypto = require('crypto');
-var should = require('should'); // jshint ignore:line
+import crypto from 'crypto';
+import should from 'should';
 
 describe('crypto', () => {
 

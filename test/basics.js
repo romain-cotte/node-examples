@@ -1,5 +1,5 @@
-var _      = require('lodash');
-var should = require('should');// jshint ignore:line
+import _ from 'lodash';
+import should from 'should';// jshint ignore:line
 
 describe('Basics', () => {
 

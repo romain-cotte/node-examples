@@ -1,5 +1,5 @@
 'use strict';
-const should = require('should');// jshint ignore:line
+import should from 'should';
 
 describe('Array', () => {
   let array;

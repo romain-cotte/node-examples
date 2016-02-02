@@ -1,5 +1,5 @@
-var async  = require('async');
-var should = require('should');
+import async from 'async';
+import should from 'should';
 
 /**
  * See https://github.com/caolan/async

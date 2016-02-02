@@ -1,6 +1,5 @@
-var async  = require('async'); // jshint ignore:line
-var fs     = require('fs');
-var should = require('should');
+import fs from 'fs';
+import should from 'should';
 
 describe('fs', () => {
 

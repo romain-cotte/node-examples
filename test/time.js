@@ -1,5 +1,5 @@
-const should = require('should'); // jshint ignore:line
-const moment = require('moment');
+import should from 'should';
+import moment from 'moment';
 
 describe('Time', () => {
   const date = new Date(2015, 5, 1, 15, 10, 45, 153);

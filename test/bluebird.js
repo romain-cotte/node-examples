@@ -1,7 +1,6 @@
-var Promise = require('bluebird');// jshint ignore:line
-
-var fs     = Promise.promisifyAll(require('fs'));
-var should = require('should');// jshint ignore:line
+import Promise from 'bluebird';
+var fs = Promise.promisifyAll(require('fs'));
+import should from 'should';
 
 /**
  * See https://github.com/petkaantonov/bluebird

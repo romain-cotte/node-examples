@@ -1,4 +1,4 @@
-const should = require('should');// jshint ignore:line
+import should from 'should';
 
 describe('Arithmetic', () => {
   /**

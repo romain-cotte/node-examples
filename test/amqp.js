@@ -1,10 +1,7 @@
-const amqplib   = require('amqplib');
-var amqplib_c = require('amqplib/callback_api');
-var async     = require('async');
+import amqplib from 'amqplib';
 import should from 'should';
 
 var q = 'tasks';
-
 /**
  * See https://github.com/squaremo/amqp.node
  */
