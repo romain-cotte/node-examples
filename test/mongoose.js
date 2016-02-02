@@ -2,7 +2,7 @@
 import async from 'async';
 import mongoose from 'mongoose';
 import should from 'should';
-import User from '../models/user';
+import { User } from '../models';
 import { Promise as qPromise } from 'q';
 
 mongoose.Promise = qPromise
