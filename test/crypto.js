@@ -4,7 +4,7 @@ import should from 'should';
 describe('crypto', () => {
 
   it('md5 encryption', () => {
-    var data = '123456';
+    const data = '123456';
     crypto.createHash('md5')
           .update(data)
           .digest('hex')

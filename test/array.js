@@ -1,7 +1,7 @@
 'use strict';
 import should from 'should';
 
-describe('Array', () => {
+describe('array', () => {
   let array;
 
   beforeEach(() => {

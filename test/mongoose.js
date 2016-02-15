@@ -35,11 +35,11 @@ describe('Mongoose', function () {
     mongoose.disconnect();
   });
 
-  it('create an ObjectId', () => {
+  it('should create an ObjectId', () => {
     (typeof ObjectId.createPk()).should.eql('object');
   });
 
-  it('findOne with a bad ObjectId', done => {
+  it('should throw error on a bad ObjectId', done => {
     User.findOne({ _id: 'badObjectId' })
       .then(done)
       .catch(err => {
@@ -52,7 +52,7 @@ describe('Mongoose', function () {
       });
   });
 
-  it('findOne with a wrong ObjectId', done => {
+  it('should not find document with a wrong ObjectId', done => {
     User.findOne({ _id: ObjectId.createPk() })
       .then(u => {
         should.not.exist(u);
@@ -61,7 +61,7 @@ describe('Mongoose', function () {
       .catch(done);
   });
 
-  it('find with a wrong ObjectId', done => {
+  it('should not find users with a wrong ObjectId', done => {
     User.find({ _id: ObjectId.createPk() })
       .then(users => {
         users.should.eql([]);
@@ -71,7 +71,7 @@ describe('Mongoose', function () {
   });
 
 
-  it('findOne', done => {
+  it('should find one user', done => {
     User.findOne({ _id: user._id })
       .then(u => {
         u.firstname.should.eql(userContent.firstname);
@@ -82,7 +82,7 @@ describe('Mongoose', function () {
       });
   });
 
-  it('findOne - with a string instead of a ObjectId => it works !', done => {
+  it('should find one user - with a string instead of a ObjectId => it works !', done => {
     User.findOne({ _id: user._id.toString() })
       .then(u => {
         u.firstname.should.eql(userContent.firstname);
@@ -92,7 +92,7 @@ describe('Mongoose', function () {
       .catch(done)
   });
 
-  it('save', done => {
+  it('should save', done => {
     var user = new User(userContent);
     user.save()
       .then((u) => {
@@ -102,7 +102,7 @@ describe('Mongoose', function () {
       .catch(done);
   });
 
-  it('save a user with a specific _id', done => {
+  it('should save a user with a specific _id', done => {
     userContent._id = ObjectId.createPk();
     var user = new User(userContent);
     user.save()
@@ -113,7 +113,7 @@ describe('Mongoose', function () {
       .catch(done);
   });
 
-  it('update', done => {
+  it('should update', done => {
     User.update({ _id: user._id },
                 { firstname: 'newFirstname' })
       .then(r => {
@@ -123,7 +123,7 @@ describe('Mongoose', function () {
       })
   });
 
-  it('count', done => {
+  it('should return user count', done => {
     User.count({})
       .then(c => {
         c.should.eql(1);
@@ -149,7 +149,7 @@ describe('Mongoose', function () {
     });
   });
 
-  it('remove', done => {
+  it('should remove the user', done => {
     user.remove()
       .then(r => {
         r.firstname.should.eql(user.firstname);

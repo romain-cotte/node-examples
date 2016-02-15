@@ -16,7 +16,7 @@ describe('Basics', () => {
     (null + 10).should.eql(10);
   });
 
-  var testCondition = (condition) => {
+  const testCondition = condition => {
     if (condition) {
       return true;
     }
@@ -31,22 +31,22 @@ describe('Basics', () => {
   });
 
   it('object copy same reference: be very careful', () => {
-    var obj = { a: 1 };
-    var copy = obj;
+    const obj = { a: 1 };
+    const copy = obj;
     copy.a = 2;
     obj.a.should.eql(2);
   });
 
   it('object real copy', () => {
-    var obj = { a: 1 };
-    var copy = _.clone(obj);
+    const obj = { a: 1 };
+    const copy = _.clone(obj);
     copy.a = 2;
     obj.a.should.eql(1);
   });
 
   it('array copy', () => {
-    var array = [ 0 ];
-    var copy = array;
+    const array = [ 0 ];
+    const copy = array;
     copy.push(1);
     array.length.should.eql(2);
   });

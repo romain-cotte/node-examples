@@ -6,7 +6,7 @@ const fs = Promise.promisifyAll(_fs);
 /**
  * See https://github.com/petkaantonov/bluebird
  */
-describe('Bluebird', () => {
+describe('bluebird', () => {
   it('should read package.json', done => {
     fs.readFileAsync('package.json')
       .then(JSON.parse)

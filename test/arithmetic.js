@@ -1,6 +1,6 @@
 import should from 'should';
 
-describe('Arithmetic', () => {
+describe('arithmetic', () => {
   /**
    * For all exemples, suppose it's 8-bit signed integer
    * First bit determine if it's negative

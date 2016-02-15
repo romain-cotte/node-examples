@@ -4,7 +4,7 @@ import should from 'should';
 /**
  * See https://github.com/caolan/async
  */
-describe('Async', () => {
+describe('async', () => {
   it('waterfall', done => {
     async.waterfall([
       (next) => {

@@ -3,11 +3,12 @@ import should from 'should';
 
 describe('fs', () => {
 
-  it('writeFile', done => {
+  it('should write a file', done => {
     fs.writeFile('test/tmp/fs-writeFile.txt', 'Hello Node', err => {
       should.not.exist(err);
       done();
     });
   });
+
 
 });

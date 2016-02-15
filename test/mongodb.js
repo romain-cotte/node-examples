@@ -2,10 +2,10 @@ import async from 'async';
 import mongodb from 'mongodb';
 import should from 'should';
 
-var url = 'mongodb://localhost:27017/node-examples';
+const url = 'mongodb://localhost:27017/node-examples';
 
 describe('Mongodb', () => {
-  var db, collection;
+  let db, collection;
 
   before(done => {
     async.waterfall([
@@ -22,9 +22,8 @@ describe('Mongodb', () => {
     ], done);
   });
 
-  after(done => {
+  after(() => {
     db.close();
-    done();
   });
 
   it('should insert 3 documents into the document collection', done => {
@@ -57,7 +56,7 @@ describe('Mongodb', () => {
     });
   });
 
-  it('findOne', done => {
+  it('should find one document', done => {
     collection.findOne({ }, (err, res) => {
       should.not.exist(err);
       res.should.have.property('a');
@@ -65,7 +64,7 @@ describe('Mongodb', () => {
     });
   });
 
-  it('find last one', done => {
+  it('should find the last document', done => {
     collection.findOne({}, { sort: [['_id','desc']] }, (err, res) => {
       should.not.exist(err);
       res.should.have.property('a');
