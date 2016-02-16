@@ -1,7 +1,7 @@
-import Promise from 'bluebird';
-import _fs from 'fs';
-import should from 'should';
-const fs = Promise.promisifyAll(_fs);
+import Promise from 'bluebird'
+import _fs from 'fs'
+import should from 'should'
+const fs = Promise.promisifyAll(_fs)
 
 /**
  * See https://github.com/petkaantonov/bluebird
@@ -11,15 +11,15 @@ describe('bluebird', () => {
     fs.readFileAsync('package.json')
       .then(JSON.parse)
       .then((json) => {
-        json.author.should.eql('Romain Cotte');
-        done();
+        json.author.should.eql('Romain Cotte')
+        done()
       })
       .catch(SyntaxError,  () => {
-        console.error('file contains invalid json');
+        console.error('file contains invalid json')
       })
       .catch(Promise.OperationalError, e => {
-        console.error('unable to read file, because: ', e.message);
-      });
-  });
-});
+        console.error('unable to read file, because: ', e.message)
+      })
+  })
+})
 

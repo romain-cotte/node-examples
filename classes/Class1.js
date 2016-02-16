@@ -1,11 +1,11 @@
 class Class1 {
   constructor() {
-    this.property1 = 1;
+    this.property1 = 1
   }
 
   toString() {
-    return 'Property=' + this.property1;
+    return 'Property=' + this.property1
   }
 }
 
-module.exports = Class1;
+module.exports = Class1

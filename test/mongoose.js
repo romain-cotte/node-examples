@@ -1,15 +1,15 @@
-'use strict';
-import async from 'async';
-import mongoose from 'mongoose';
-import should from 'should';
-import { User } from '../models';
-import { Promise as qPromise } from 'q';
+'use strict'
+import async from 'async'
+import mongoose from 'mongoose'
+import should from 'should'
+import { User } from '../models'
+import { Promise as qPromise } from 'q'
 
 mongoose.Promise = qPromise
-const ObjectId = mongoose.Types.ObjectId;
+const ObjectId = mongoose.Types.ObjectId
 
 describe('Mongoose', function () {
-  let user;
+  let user
   const userContent = {
     firstname: 'Firstname',
     lastname: 'Lastname',
@@ -17,146 +17,146 @@ describe('Mongoose', function () {
       street: '3 rue de l\'Eglise',
       city: 'Paris'
     }
-  };
+  }
 
   before(() => {
-    mongoose.connect('localhost:27017/node-examples');
-  });
+    mongoose.connect('localhost:27017/node-examples')
+  })
 
   beforeEach(done => {
-    user = new User(userContent);
+    user = new User(userContent)
     User.remove()
       .then(user.save)
       .then(u => { done(); })
-      .catch(done);
-  });
+      .catch(done)
+  })
 
   after(() => {
-    mongoose.disconnect();
-  });
+    mongoose.disconnect()
+  })
 
   it('should create an ObjectId', () => {
-    (typeof ObjectId.createPk()).should.eql('object');
-  });
+    (typeof ObjectId.createPk()).should.eql('object')
+  })
 
   it('should throw error on a bad ObjectId', done => {
     User.findOne({ _id: 'badObjectId' })
       .then(done)
       .catch(err => {
-        err.message.should.eql('Cast to ObjectId failed for value "badObjectId" at path "_id"');
-        err.name.should.eql('CastError');
-        err.kind.should.eql('ObjectId');
-        err.value.should.eql('badObjectId');
-        err.path.should.eql('_id');
-        done();
-      });
-  });
+        err.message.should.eql('Cast to ObjectId failed for value "badObjectId" at path "_id"')
+        err.name.should.eql('CastError')
+        err.kind.should.eql('ObjectId')
+        err.value.should.eql('badObjectId')
+        err.path.should.eql('_id')
+        done()
+      })
+  })
 
   it('should not find document with a wrong ObjectId', done => {
     User.findOne({ _id: ObjectId.createPk() })
       .then(u => {
-        should.not.exist(u);
-        done();
+        should.not.exist(u)
+        done()
       })
-      .catch(done);
-  });
+      .catch(done)
+  })
 
   it('should not find users with a wrong ObjectId', done => {
     User.find({ _id: ObjectId.createPk() })
       .then(users => {
-        users.should.eql([]);
-        done();
+        users.should.eql([])
+        done()
       })
-      .catch(done);
-  });
+      .catch(done)
+  })
 
 
   it('should find one user', done => {
     User.findOne({ _id: user._id })
       .then(u => {
-        u.firstname.should.eql(userContent.firstname);
-        u.lastname.should.eql(userContent.lastname);
-        u.address.city.should.eql(userContent.address.city);
-        u.address.street.should.eql(userContent.address.street);
-        done();
-      });
-  });
+        u.firstname.should.eql(userContent.firstname)
+        u.lastname.should.eql(userContent.lastname)
+        u.address.city.should.eql(userContent.address.city)
+        u.address.street.should.eql(userContent.address.street)
+        done()
+      })
+  })
 
   it('should find one user - with a string instead of a ObjectId => it works !', done => {
     User.findOne({ _id: user._id.toString() })
       .then(u => {
-        u.firstname.should.eql(userContent.firstname);
-        u.lastname.should.eql(userContent.lastname);
-        done();
-      })
-      .catch(done)
-  });
-
-  it('should save', done => {
-    var user = new User(userContent);
-    user.save()
-      .then((u) => {
-        should.exist(u);
-        done();
-      })
-      .catch(done);
-  });
-
-  it('should save a user with a specific _id', done => {
-    userContent._id = ObjectId.createPk();
-    var user = new User(userContent);
-    user.save()
-      .then(u => {
-        u._id.should.eql(userContent._id);
+        u.firstname.should.eql(userContent.firstname)
+        u.lastname.should.eql(userContent.lastname)
         done()
       })
-      .catch(done);
-  });
+      .catch(done)
+  })
+
+  it('should save', done => {
+    var user = new User(userContent)
+    user.save()
+      .then((u) => {
+        should.exist(u)
+        done()
+      })
+      .catch(done)
+  })
+
+  it('should save a user with a specific _id', done => {
+    userContent._id = ObjectId.createPk()
+    var user = new User(userContent)
+    user.save()
+      .then(u => {
+        u._id.should.eql(userContent._id)
+        done()
+      })
+      .catch(done)
+  })
 
   it('should update', done => {
     User.update({ _id: user._id },
                 { firstname: 'newFirstname' })
       .then(r => {
-        r.ok.should.eql(1);
-        r.n.should.eql(1);
-        done();
+        r.ok.should.eql(1)
+        r.n.should.eql(1)
+        done()
       })
-  });
+  })
 
   it('should return user count', done => {
     User.count({})
       .then(c => {
-        c.should.eql(1);
-        done();
+        c.should.eql(1)
+        done()
       })
-      .catch(done);
-  });
+      .catch(done)
+  })
 
   it('stream', done => {
-    var stream = User.find().stream();
-    var count = 0;
+    var stream = User.find().stream()
+    var count = 0
     stream.on('data', () => {
-      count++;
-    });
+      count++
+    })
 
     stream.on('error', err => {
-      should.not.exist(err);
-    });
+      should.not.exist(err)
+    })
 
     stream.on('close', () => {
-      count.should.eql(1);
-      done();
-    });
-  });
+      count.should.eql(1)
+      done()
+    })
+  })
 
   it('should remove the user', done => {
     user.remove()
       .then(r => {
-        r.firstname.should.eql(user.firstname);
-        r.lastname.should.eql(user.lastname);
-        r._id.should.eql(user._id);
-        done();
+        r.firstname.should.eql(user.firstname)
+        r.lastname.should.eql(user.lastname)
+        r._id.should.eql(user._id)
+        done()
       })
-  });
+  })
 
-});
+})
