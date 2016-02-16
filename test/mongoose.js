@@ -7,7 +7,7 @@ import { Promise as qPromise } from 'q'
 mongoose.Promise = qPromise
 const ObjectId = mongoose.Types.ObjectId
 
-describe('Mongoose', function () {
+describe('Mongoose', () => {
   let user
   const userContent = {
     firstname: 'Firstname',
@@ -92,9 +92,9 @@ describe('Mongoose', function () {
   })
 
   it('should save', done => {
-    var user = new User(userContent)
+    const user = new User(userContent)
     user.save()
-      .then((u) => {
+      .then(u => {
         should.exist(u)
         done()
       })
@@ -103,7 +103,7 @@ describe('Mongoose', function () {
 
   it('should save a user with a specific _id', done => {
     userContent._id = ObjectId.createPk()
-    var user = new User(userContent)
+    const user = new User(userContent)
     user.save()
       .then(u => {
         u._id.should.eql(userContent._id)
@@ -132,8 +132,8 @@ describe('Mongoose', function () {
   })
 
   it('stream', done => {
-    var stream = User.find().stream()
-    var count = 0
+    const stream = User.find().stream()
+    let count = 0
     stream.on('data', () => {
       count++
     })

@@ -9,7 +9,7 @@ describe('Mongodb', () => {
 
   before(done => {
     async.waterfall([
-      (next) => {
+      next => {
         /* Database connection */
         mongodb.MongoClient.connect(url, next)
       },
@@ -26,11 +26,18 @@ describe('Mongodb', () => {
     db.close()
   })
 
+  beforeEach(done => {
+    collection.remove()
+      .then(() => collection.insert([{ a : 1 }, { a : 2 }, { a : 3 }]))
+      .then(() => done())
+      .catch(done)
+  })
+
   it('should insert 3 documents into the document collection', done => {
     collection
       .insert([
         { a : 1 }, { a : 2 }, { a : 3 }
-      ], function (err, result) {
+      ], (err, result) => {
         should.not.exist(err)
         result.result.n.should.eql(3)
         result.ops.length.should.eql(3)
@@ -39,7 +46,7 @@ describe('Mongodb', () => {
   })
 
   it('should retrieve documents of document collection', done => {
-    collection.find({ a: 1 }).toArray(function (err, documents) {
+    collection.find({ a: 1 }).toArray((err, documents) => {
       should.not.exist(err)
       documents.length.should.eql(1)
       done()
@@ -47,29 +54,29 @@ describe('Mongodb', () => {
   })
 
   it('should update a document', done => {
-    collection.update({ a : 2 },
-                      { $set: { b : 1 } },
-                      function (err, result) {
-                        should.not.exist(err)
-                        result.result.n.should.eql(1)
-                        done()
-                      })
+    collection.update({ a : 2 }, { $set: { b : 1 } })
+      .then(result => {
+        result.result.n.should.eql(1)
+        done()
+      })
   })
 
   it('should find one document', done => {
-    collection.findOne({ }, (err, res) => {
-      should.not.exist(err)
-      res.should.have.property('a')
-      done()
-    })
+    collection.findOne({ })
+      .then(res => {
+        res.should.have.property('a')
+        done()
+      })
+      .catch(done)
   })
 
   it('should find the last document', done => {
-    collection.findOne({}, { sort: [['_id','desc']] }, (err, res) => {
-      should.not.exist(err)
-      res.should.have.property('a')
-      done()
-    })
+    collection.findOne({}, { sort: [['_id','desc']] })
+      .then(res => {
+        res.should.have.property('a')
+        done()
+      })
+      .catch(done)
   })
 
 })
