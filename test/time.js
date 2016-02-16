@@ -1,4 +1,4 @@
-import should from 'should'
+import should from 'should' //eslint-disable-line
 import moment from 'moment'
 
 describe('Time', () => {

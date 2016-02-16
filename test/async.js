@@ -82,7 +82,7 @@ describe('async', () => {
         // notDefined.id
         /* Throw an error here */
         next(null, 'result')
-      },
+      }
     ], (err/*, result === 'result' */) => {
       should.not.exist(err)
       done()
@@ -90,24 +90,22 @@ describe('async', () => {
   })
 
   it('async process.nextTick', done => {
+    const arr = []
     async.series([
       (next) => {
-        console.log(0)
+        arr.push(0)
         process.nextTick(next)
       },
       (next) => {
-        console.log(1)
+        arr.push(1)
         next(null)
       }
     ], (err) => {
       should.not.exist(err)
+      arr.should.eql([0, 2, 1])
       done()
     })
-    console.log('a')
-    // Will display :
-    // 0
-    // a
-    // 1
+    arr.push(2)
   })
 
 })

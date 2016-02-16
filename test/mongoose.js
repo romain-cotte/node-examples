@@ -1,5 +1,4 @@
 'use strict'
-import async from 'async'
 import mongoose from 'mongoose'
 import should from 'should'
 import { User } from '../models'
@@ -27,7 +26,7 @@ describe('Mongoose', function () {
     user = new User(userContent)
     User.remove()
       .then(user.save)
-      .then(u => { done(); })
+      .then(() => { done() })
       .catch(done)
   })
 

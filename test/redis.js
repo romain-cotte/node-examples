@@ -6,17 +6,15 @@ import should from 'should'
 
 describe('Redis', () => {
   let client
-  before(done => {
+  before(() => {
     client = redis.createClient()
-    client.on('error', (err) => {
-      console.log('Error ' + err)
+    client.on('error', err => {
+      console.log('Error', err) //eslint-disable-line
     })
-    done()
   })
 
-  after(done => {
+  after(() => {
     client.quit()
-    done()
   })
 
   it('set - get', done => {
@@ -105,7 +103,7 @@ describe('Redis', () => {
       (res, next) => {
         res.should.eql(['property'])
         client.hgetall(key, next)
-      },
+      }
     ], (err, result) => {
       should.not.exist(err)
       result.should.eql({ property: 'value' })
@@ -155,7 +153,7 @@ describe('Redis', () => {
         (result, next) => {
           result.should.equal('OK')
           client.hgetall(key, next)
-        },
+        }
       ], (err, result) => {
         should.not.exist(err)
         result.key1.should.eql(obj.key1)
@@ -176,7 +174,7 @@ describe('Redis', () => {
         (result, next) => {
           result.should.equal(1)
           client.hget(key, prop, next)
-        },
+        }
       ], (err, result) => {
         should.not.exist(err)
         result.should.eql(JSON.stringify(obj))
@@ -199,7 +197,7 @@ describe('Redis', () => {
         (result, next) => {
           result.should.equal('OK')
           client.hgetall(key, next)
-        },
+        }
       ], (err, result) => {
         should.not.exist(err)
         result.should.eql(object)

@@ -1,4 +1,4 @@
-import should from 'should'
+import should from 'should' //eslint-disable-line
 
 function* gen() {
   yield* ['a', 'b', 'c']

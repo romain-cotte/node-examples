@@ -47,13 +47,13 @@ describe('Mongodb', () => {
   })
 
   it('should update a document', done => {
-     collection.update({ a : 2 },
-                       { $set: { b : 1 } },
-                       function (err, result) {
-      should.not.exist(err)
-      result.result.n.should.eql(1)
-      done()
-    })
+    collection.update({ a : 2 },
+                      { $set: { b : 1 } },
+                      function (err, result) {
+                        should.not.exist(err)
+                        result.result.n.should.eql(1)
+                        done()
+                      })
   })
 
   it('should find one document', done => {

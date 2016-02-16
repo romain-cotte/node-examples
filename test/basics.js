@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import should from 'should'
+import should from 'should' //eslint-disable-line
 
 describe('Basics', () => {
 

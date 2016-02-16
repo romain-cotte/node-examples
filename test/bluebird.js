@@ -1,6 +1,6 @@
 import Promise from 'bluebird'
 import _fs from 'fs'
-import should from 'should'
+import should from 'should' //eslint-disable-line
 const fs = Promise.promisifyAll(_fs)
 
 /**
@@ -15,10 +15,10 @@ describe('bluebird', () => {
         done()
       })
       .catch(SyntaxError,  () => {
-        console.error('file contains invalid json')
+        console.error('file contains invalid json') //eslint-disable-line
       })
       .catch(Promise.OperationalError, e => {
-        console.error('unable to read file, because: ', e.message)
+        console.error('unable to read file, because: ', e.message) //eslint-disable-line
       })
   })
 })
