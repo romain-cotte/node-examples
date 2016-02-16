@@ -5,4 +5,7 @@ test: redis-flush
 redis-flush:
 	redis-cli flushall
 
+lint:
+	eslint ./{classes,models,test}{/**,}/*.js
+
 .PHONY: bluebird test
