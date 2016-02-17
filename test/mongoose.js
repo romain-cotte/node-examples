@@ -69,7 +69,6 @@ describe('Mongoose', () => {
       .catch(done)
   })
 
-
   it('should find one user', done => {
     User.findOne({ _id: user._id })
       .then(u => {
