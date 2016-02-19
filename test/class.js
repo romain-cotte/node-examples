@@ -13,6 +13,7 @@ describe('ClassA', () => {
     (function(){
       // Wrong type of arguments
       let a = new ClassA(10, 'aze')
+      // Will only throw in test environment
     }).should.throw();
   })
 
