@@ -1,8 +1,9 @@
 class ClassA {
-  str: string;
-  n: number;
+  str: string
+  n: number
 
-  constructor(str: string, n: number) {
+  // ?string may be null or undefined
+  constructor(str: ?string, n: ?number) {
     this.str = str || 'hello'
     this.n = n || 0
   }
@@ -16,4 +17,3 @@ class ClassA {
 }
 
 module.exports = ClassA
-
