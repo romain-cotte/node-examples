@@ -4,8 +4,8 @@ class ClassA {
 
   // ?string may be null or undefined
   constructor(str: ?string, n: ?number) {
-    this.str = str || 'hello'
-    this.n = n || 0
+    this.str = str || 'hello'
+    this.n = n || 0
   }
 
   toString(): string {
