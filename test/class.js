@@ -18,6 +18,10 @@ describe('Class', () => {
     }).should.throw()
   })
 
+  it('static method', () => {
+    A.staticMethod('abcd').should.eql('[abcd]')
+  })
+
   it('inheritance', () => {
     const b = new B()
     b.toString().should.eql('Inside B, your string is hello')

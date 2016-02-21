@@ -14,6 +14,10 @@ class A {
   toNumber(): number {
     return this.n
   }
+
+  static staticMethod(str: ?string) {
+    return `[${str}]`
+  }
 }
 
 module.exports = A

@@ -67,7 +67,6 @@ describe('Redis', () => {
     ], (err, res) => {
       (res === null).should.be.true()
       done()
-      // result now equals 'done'
     })
   })
 
@@ -83,7 +82,6 @@ describe('Redis', () => {
     ], (err, res) => {
       res.should.eql(1)
       done()
-      // result now equals 'done'
     })
   })
 

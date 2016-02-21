@@ -10,11 +10,11 @@ describe('bluebird', () => {
   it('should read package.json', done => {
     fs.readFileAsync('package.json')
       .then(JSON.parse)
-      .then((json) => {
+      .then(json => {
         json.author.should.eql('Romain Cotte')
         done()
       })
-      .catch(SyntaxError,  () => {
+      .catch(SyntaxError, () => {
         console.error('file contains invalid json') //eslint-disable-line
       })
       .catch(Promise.OperationalError, e => {

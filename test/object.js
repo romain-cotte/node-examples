@@ -30,5 +30,9 @@ describe('object', () => {
     result.should.eql(['prop'])
   })
 
-})
+  it('deep equal', () => {
+    const obj = { a: { b: { c: 1 } } }
+    obj.should.eql({ a: { b: { c: 1 } } })
+  })
 
+})
