@@ -1,4 +1,4 @@
-class ClassA {
+class A {
   str: string
   n: number
 
@@ -16,4 +16,4 @@ class ClassA {
   }
 }
 
-module.exports = ClassA
+module.exports = A
