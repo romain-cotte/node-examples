@@ -53,4 +53,9 @@ describe('Class', () => {
     result.should.eql([1, 2, 3, 4])
   })
 
+  it('newInstance from staticMethod', () => {
+    const a = A.newInstance()
+    a.toString().should.eql('Your string is from newInstance')
+  })
+
 })

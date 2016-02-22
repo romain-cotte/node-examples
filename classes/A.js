@@ -19,6 +19,10 @@ class A {
   static staticMethod(str: ?string) {
     return `[${str}]`
   }
+
+  static newInstance() {
+    return new A('from newInstance', 0)
+  }
 }
 
 module.exports = A
