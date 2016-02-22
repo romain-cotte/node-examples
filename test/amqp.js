@@ -27,7 +27,7 @@ describe('amqp', () => {
     connection.close()
   })
 
-  it('should publish and consume a message', (done) => {
+  it('send a message and consume it, 1 "Hello world" example', done => {
     let message = 'message content'
     channel.sendToQueue(queue, new Buffer(message))
     channel.consume(queue, msg => {

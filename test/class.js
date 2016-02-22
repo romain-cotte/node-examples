@@ -1,5 +1,6 @@
 import A from '../classes/A.js'
 import B from '../classes/B.js'
+import C from '../classes/C.js'
 import should from 'should' //eslint-disable-line
 
 describe('Class', () => {
@@ -27,6 +28,29 @@ describe('Class', () => {
     b.toString().should.eql('Inside B, your string is hello')
     b.should.be.an.instanceOf(A)
     b.should.be.an.instanceOf(B)
+  })
+
+  it('super method', () => {
+    const b = new B()
+    b.toStringFromSuper().should.eql('Your string is hello!!!')
+  })
+
+  it('Symbol.iterator method', () => {
+    const b = new B()
+    const result = []
+    for (let x of b) {
+      result.push(x)
+    }
+    result.should.eql([1, 2, 3])
+  })
+
+  it('Symbol iterator method', () => {
+    const c = new C(1, 2, 3, 4)
+    const result = []
+    for (let x of c) {
+      result.push(x)
+    }
+    result.should.eql([1, 2, 3, 4])
   })
 
 })

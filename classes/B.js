@@ -5,6 +5,16 @@ class B extends A {
   toString(): string {
     return `Inside B, your string is ${this.str}`
   }
+
+  toStringFromSuper () {
+    return super.toString() + '!!!';
+  }
+
+  * [Symbol.iterator] () {
+    yield 1
+    yield 2
+    yield 3
+  }
 }
 
 module.exports = B

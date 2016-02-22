@@ -11,6 +11,7 @@ class A {
   toString(): string {
     return `Your string is ${this.str}`
   }
+
   toNumber(): number {
     return this.n
   }
