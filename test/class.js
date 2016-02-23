@@ -1,6 +1,7 @@
 import A from '../classes/A.js'
 import B from '../classes/B.js'
 import C from '../classes/C.js'
+import staticA from '../classes/StaticA.js'
 import should from 'should' //eslint-disable-line
 
 describe('Class', () => {
@@ -56,6 +57,10 @@ describe('Class', () => {
   it('newInstance from staticMethod', () => {
     const a = A.newInstance()
     a.toString().should.eql('Your string is from newInstance')
+  })
+
+  it('static class', () => {
+    staticA.toString().should.eql('Your string is from static class')
   })
 
 })
