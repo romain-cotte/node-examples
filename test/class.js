@@ -24,6 +24,10 @@ describe('Class', () => {
     A.staticMethod('abcd').should.eql('[abcd]')
   })
 
+  it('static property', () => {
+    A.prop.should.eql('prop')
+  })
+
   it('inheritance', () => {
     const b = new B()
     b.toString().should.eql('Inside B, your string is hello')

@@ -8,6 +8,10 @@ class A {
     this.n = n || 0
   }
 
+  setString(str: string) {
+    this.str = str
+  }
+
   toString(): string {
     return `Your string is ${this.str}`
   }
@@ -23,6 +27,8 @@ class A {
   static newInstance() {
     return new A('from newInstance', 0)
   }
+
+  static prop = 'prop'
 }
 
 module.exports = A
