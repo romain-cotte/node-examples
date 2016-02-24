@@ -3,16 +3,7 @@ node-examples
 [![Build Status](https://img.shields.io/travis/LilMeyer/node-examples/master.svg?style=flat-square)](https://travis-ci.org/LilMeyer/node-examples)
 [![Dependency Status](https://img.shields.io/david/LilMeyer/node-examples/master.svg?style=flat-square)](https://david-dm.org/lilmeyer/node-examples)
 
-## Debug
-If you want to debug a test, install node-inspector
-```sh
-npm install -g node-inspector
-```
-And launch test with:
 
-```sh
-node-debug _mocha path/to/test
-```
 
 References
 ---
@@ -24,5 +15,3 @@ References
 - [Mongoose](http://mongoosejs.com/)
 - [Redis](https://github.com/mranney/node_redis)
 - [Node-inspector](https://github.com/node-inspector/node-inspector#how-do-i-debug-mocha-unit-tests)
-
-?style=flat-square
