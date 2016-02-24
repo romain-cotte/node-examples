@@ -5,6 +5,7 @@ import should from 'should'
  * See https://github.com/caolan/async
  */
 describe('async', () => {
+
   it('waterfall', done => {
     async.waterfall([
       (next) => {
@@ -31,8 +32,8 @@ describe('async', () => {
         next(null, 'two')
       }
     ], (err, results) => { // Optional
-      var arg2 = results.pop()
-      var arg1 = results.pop()
+      let arg2 = results.pop()
+      let arg1 = results.pop()
       arg1.should.eql('one')
       arg2.should.eql('two')
       done()
@@ -48,8 +49,8 @@ describe('async', () => {
         next(null, 'two')
       }
     ], (err, results) => {
-      var arg2 = results.pop()
-      var arg1 = results.pop()
+      let arg2 = results.pop()
+      let arg1 = results.pop()
       arg1.should.eql('one')
       arg2.should.eql('two')
       done()
@@ -57,13 +58,13 @@ describe('async', () => {
   })
 
   it('map', done => {
-    var AsyncSquaringLibrary = {
+    let AsyncSquaringLibrary = {
       squareExponent: 2,
       square: function (number, callback) {
-        var result = Math.pow(number, this.squareExponent)
+        let result = Math.pow(number, this.squareExponent)
         setTimeout(() => {
           callback(null, result)
-        }, 200)
+        }, 50)
       }
     }
 
