@@ -38,6 +38,17 @@ describe('Mongoose', () => {
     (typeof ObjectId.createPk()).should.eql('object')
   })
 
+  it('should create several users', done => {
+    User.create([userContent, userContent])
+      .then(() => {
+        return User.count()
+      })
+      .then(c => {
+        c.should.eql(3)
+        done()
+      })
+  })
+
   it('should throw error on a bad ObjectId', done => {
     User.findOne({ _id: 'badObjectId' })
       .then(done)
@@ -82,6 +93,16 @@ describe('Mongoose', () => {
 
   it('should find one user - with a string instead of a ObjectId => it works !', done => {
     User.findOne({ _id: user._id.toString() })
+      .then(u => {
+        u.firstname.should.eql(userContent.firstname)
+        u.lastname.should.eql(userContent.lastname)
+        done()
+      })
+      .catch(done)
+  })
+
+  it('should find a user by id', done => {
+    User.findById(user._id.toString())
       .then(u => {
         u.firstname.should.eql(userContent.firstname)
         u.lastname.should.eql(userContent.lastname)

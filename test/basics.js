@@ -30,6 +30,13 @@ describe('Basics', () => {
     testCondition(undefined).should.be.false()
   })
 
+  it('variable copy', () => {
+    const a = 1 // works with let too
+    let b = a
+    b = 10
+    a.should.eql(1)
+  })
+
   it('object copy same reference: be very careful', () => {
     const obj = { a: 1 }
     const copy = obj
