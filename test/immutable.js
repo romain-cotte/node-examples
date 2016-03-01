@@ -1,0 +1,24 @@
+import should from 'should'
+import Immutable from 'immutable'
+/**
+ * See https://facebook.github.io/immutable-js/
+ */
+
+describe('immutable', () => {
+
+  it('map', () => {
+    const map1 = Immutable.Map({ a:1, b:2, c:3 })
+    const map2 = map1.set('b', 10)
+    map1.get('b').should.eql(2)
+    map2.get('b').should.eql(10)
+    ;(map1.equals(map2)).should.be.false()
+  })
+
+  it('list', () => {
+    const list1 = Immutable.List.of(1, 2);
+    const list2 = list1.push(3, 4, 5);
+    list1.size.should.eql(2)
+    list2.size.should.eql(5)
+  })
+
+})

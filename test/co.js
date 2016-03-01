@@ -14,6 +14,19 @@ describe('co', () => {
     .catch(done)
   })
 
+  it('generic example with several promises', done => {
+    co(function* () {
+      const r = yield Promise.resolve(true)
+      const s = yield Promise.resolve(r)
+      return s
+    })
+    .then(val => {
+      val.should.be.true()
+      done()
+    })
+    .catch(done)
+  })
+
   it('wrapping a function', done => {
     let fn = co.wrap(function* (val) {
       return yield Promise.resolve(val)
