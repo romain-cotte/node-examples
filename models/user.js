@@ -7,7 +7,8 @@ const UserSchema = new Schema({
   address: {
     street: { type: String },
     city: { type: String }
-  }
+  },
+  pets: [{ type: String }]
 })
 
 module.exports = mongoose.model('User', UserSchema)

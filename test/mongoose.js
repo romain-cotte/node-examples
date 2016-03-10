@@ -142,6 +142,22 @@ describe('Mongoose', () => {
       })
   })
 
+  it('should update a field and push a new value in pets array', done => {
+    User.update(
+      { _id: user._id },
+      { firstname: 'AAA', $push: { pets: 'dog' } }
+    )
+    .then(r => {
+      return User.findOne({ _id: user._id })
+    })
+    .then(u => {
+      u.firstname.should.eql('AAA')
+      u.pets.should.eql(['dog'])
+      done()
+    })
+    .catch(done)
+  })
+
   it('should return user count', done => {
     User.count({})
       .then(c => {
