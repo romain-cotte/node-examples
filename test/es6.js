@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import should from 'should'
 import fs from 'fs'
+
 describe('es6 notation', () => {
 
   it('bracket notation inside object', () => {

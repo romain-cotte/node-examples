@@ -8,7 +8,7 @@ describe('async', () => {
 
   it('waterfall', done => {
     async.waterfall([
-      (next) => {
+      next => {
         next(null, 'one', 'two')
       },
       (arg1, arg2, next) => {
@@ -25,10 +25,10 @@ describe('async', () => {
 
   it('parallel', done => {
     async.parallel([
-      (next) => {
+      next => {
         next(null, 'one')
       },
-      (next) => {
+      next => {
         next(null, 'two')
       }
     ], (err, results) => { // Optional
@@ -42,10 +42,10 @@ describe('async', () => {
 
   it('series', done => {
     async.series([
-      (next) => {
+      next => {
         next(null, 'one')
       },
-      (next) => {
+      next => {
         next(null, 'two')
       }
     ], (err, results) => {
@@ -79,7 +79,7 @@ describe('async', () => {
 
   it('error', done => {
     async.waterfall([
-      (next) => {
+      next => {
         // notDefined.id
         /* Throw an error here */
         next(null, 'result')
@@ -93,15 +93,15 @@ describe('async', () => {
   it('async process.nextTick', done => {
     const arr = []
     async.series([
-      (next) => {
+      next => {
         arr.push(0)
         process.nextTick(next)
       },
-      (next) => {
+      next => {
         arr.push(1)
         next(null)
       }
-    ], (err) => {
+    ], err => {
       should.not.exist(err)
       arr.should.eql([0, 2, 1])
       done()
