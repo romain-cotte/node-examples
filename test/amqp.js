@@ -1,3 +1,5 @@
+'use strict';
+
 const amqplib = require('amqplib')
 const should = require('should')
 

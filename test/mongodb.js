@@ -1,3 +1,5 @@
+'use strict'
+
 const async = require('async')
 const mongodb = require('mongodb')
 const should = require('should')

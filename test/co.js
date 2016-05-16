@@ -1,3 +1,5 @@
+'use strict'
+
 const co = require('co')
 const should = require('should')
 

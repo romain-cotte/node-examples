@@ -1,6 +1,8 @@
 const A = require('../classes/A.js')
 const B = require('../classes/B.js')
 const C = require('../classes/C.js')
+'use strict'
+
 const staticA = require('../classes/StaticA.js')
 const should = require('should') //eslint-disable-line
 

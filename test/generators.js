@@ -1,3 +1,5 @@
+'use strict'
+
 const should = require('should') //eslint-disable-line
 
 function* gen() {

@@ -1,3 +1,5 @@
+'use strict'
+
 const Promise = require('bluebird')
 const _fs = require('fs')
 const should = require('should') //eslint-disable-line

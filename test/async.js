@@ -1,3 +1,5 @@
+'use strict'
+
 const async = require('async')
 const should = require('should')
 
@@ -68,13 +70,15 @@ describe('async', () => {
       }
     }
 
-    async.map([1, 2, 3],
-              AsyncSquaringLibrary.square.bind(AsyncSquaringLibrary),
-              (err, result) => {
-                should.not.exist(err)
-                result.should.eql([1, 4, 9])
-                done()
-              })
+    async.map(
+      [1, 2, 3],
+      AsyncSquaringLibrary.square.bind(AsyncSquaringLibrary),
+      (err, result) => {
+        should.not.exist(err)
+        result.should.eql([1, 4, 9])
+        done()
+      }
+    )
   })
 
   it('error', done => {

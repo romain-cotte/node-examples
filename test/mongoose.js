@@ -1,4 +1,5 @@
 'use strict'
+
 const mongoose = require('mongoose')
 const should = require('should')
 const User = require('../models').User
