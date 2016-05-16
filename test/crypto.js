@@ -1,5 +1,5 @@
-import crypto from 'crypto'
-import should from 'should' //eslint-disable-line
+const crypto = require('crypto')
+const should = require('should') //eslint-disable-line
 
 describe('crypto', () => {
 

@@ -1,6 +1,6 @@
-import Promise from 'bluebird'
-import _fs from 'fs'
-import should from 'should' //eslint-disable-line
+const Promise = require('bluebird')
+const _fs = require('fs')
+const should = require('should') //eslint-disable-line
 const fs = Promise.promisifyAll(_fs)
 
 /**

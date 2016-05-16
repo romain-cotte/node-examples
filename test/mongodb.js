@@ -1,6 +1,6 @@
-import async from 'async'
-import mongodb from 'mongodb'
-import should from 'should'
+const async = require('async')
+const mongodb = require('mongodb')
+const should = require('should')
 
 const url = 'mongodb://localhost:27017/node-examples'
 

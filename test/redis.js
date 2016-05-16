@@ -1,8 +1,8 @@
 'use strict'
 
-import async from 'async'
-import redis from 'redis'
-import should from 'should'
+const async = require('async')
+const redis = require('redis')
+const should = require('should')
 
 describe('Redis', () => {
   let client

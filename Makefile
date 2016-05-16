@@ -1,6 +1,6 @@
 
 test: redis-flush
-	mocha --compilers js:babel-core/register --require babel-polyfill
+	mocha
 
 redis-flush:
 	redis-cli flushall

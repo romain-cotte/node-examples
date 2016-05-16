@@ -1,5 +1,5 @@
-import fs from 'fs'
-import should from 'should'
+const fs = require('fs')
+const should = require('should')
 
 describe('fs', () => {
 

@@ -1,8 +1,8 @@
 'use strict'
-import mongoose from 'mongoose'
-import should from 'should'
-import { User } from '../models'
-import { Promise as qPromise } from 'q'
+const mongoose = require('mongoose')
+const should = require('should')
+const User = require('../models').User
+const qPromise = require('q').Promise
 
 mongoose.Promise = qPromise
 const ObjectId = mongoose.Types.ObjectId

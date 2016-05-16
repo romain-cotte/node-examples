@@ -1,8 +1,8 @@
-import A from '../classes/A.js'
-import B from '../classes/B.js'
-import C from '../classes/C.js'
-import staticA from '../classes/StaticA.js'
-import should from 'should' //eslint-disable-line
+const A = require('../classes/A.js')
+const B = require('../classes/B.js')
+const C = require('../classes/C.js')
+const staticA = require('../classes/StaticA.js')
+const should = require('should') //eslint-disable-line
 
 describe('Class', () => {
 
@@ -12,21 +12,23 @@ describe('Class', () => {
     a.toNumber().should.eql(0)
   })
 
-  it('constructor with wrong parameter', () => {
-    (() => {
-      // Wrong type of arguments
-      new A(10, 'aze')
-      // Will only throw in test environment
-    }).should.throw()
-  })
+  // Only with flow typing
+  // it('constructor with wrong parameter', () => {
+  //   (() => {
+  //     // Wrong type of arguments
+  //     new A(10, 'aze')
+  //     // Will only throw in test environment
+  //   }).should.throw()
+  // })
 
   it('static method', () => {
     A.staticMethod('abcd').should.eql('[abcd]')
   })
 
-  it('static property', () => {
-    A.prop.should.eql('prop')
-  })
+  // Only with babel
+  // it('static property', () => {
+  //   A.prop.should.eql('prop')
+  // })
 
   it('inheritance', () => {
     const b = new B()

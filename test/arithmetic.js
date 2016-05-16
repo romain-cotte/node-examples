@@ -1,4 +1,4 @@
-import should from 'should'
+const should = require('should')
 
 describe('arithmetic', () => {
   /**

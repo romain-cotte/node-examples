@@ -1,5 +1,5 @@
-import amqplib from 'amqplib'
-import should from 'should'
+const amqplib = require('amqplib')
+const should = require('should')
 
 let queue = 'tasks'
 /**

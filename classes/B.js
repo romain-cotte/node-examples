@@ -1,4 +1,4 @@
-import A from './A'
+const A = require('./A')
 
 class B extends A {
   /* Overwrite A's method */
@@ -6,7 +6,7 @@ class B extends A {
     super()
   }
 
-  toString(): string {
+  toString() {
     return `Inside B, your string is ${this.str}`
   }
 

@@ -1,11 +1,10 @@
 class StaticA {
-  str: string
 
   constructor() {
     this.str = 'from static class'
   }
 
-  toString(): string {
+  toString() {
     return `Your string is ${this.str}`
   }
 

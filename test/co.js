@@ -1,5 +1,5 @@
-import co from 'co'
-import should from 'should'
+const co = require('co')
+const should = require('should')
 
 describe('co', () => {
 

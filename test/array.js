@@ -1,5 +1,5 @@
 'use strict'
-import should from 'should' //eslint-disable-line
+const should = require('should') //eslint-disable-line
 
 describe('array', () => {
   let array

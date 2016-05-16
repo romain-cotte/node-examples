@@ -1,4 +1,4 @@
-import should from 'should' //eslint-disable-line
+const should = require('should') //eslint-disable-line
 
 function* gen() {
   yield* ['a', 'b', 'c']

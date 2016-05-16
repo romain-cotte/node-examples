@@ -1,4 +1,4 @@
-import 'should'
+const should = require('should')
 
 describe('Promise', () => {
 

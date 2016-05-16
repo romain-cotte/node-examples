@@ -1,5 +1,5 @@
-import should from 'should' //eslint-disable-line
-import moment from 'moment'
+const should = require('should') //eslint-disable-line
+const moment = require('moment')
 
 describe('Time', () => {
   const date = new Date(2015, 5, 1, 15, 10, 45, 153)

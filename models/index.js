@@ -1,4 +1,4 @@
-import User from './user'
+const User = require('./user')
 
 module.exports = {
   User

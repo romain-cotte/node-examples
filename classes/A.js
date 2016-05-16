@@ -1,26 +1,24 @@
 class A {
-  str: string
-  n: number
 
   // ?string may be null or undefined
-  constructor(str: ?string, n: ?number) {
+  constructor(str, n) {
     this.str = str || 'hello'
     this.n = n || 0
   }
 
-  setString(str: string) {
+  setString(str) {
     this.str = str
   }
 
-  toString(): string {
+  toString() {
     return `Your string is ${this.str}`
   }
 
-  toNumber(): number {
+  toNumber() {
     return this.n
   }
 
-  static staticMethod(str: ?string) {
+  static staticMethod(str) {
     return `[${str}]`
   }
 
@@ -28,7 +26,7 @@ class A {
     return new A('from newInstance', 0)
   }
 
-  static prop = 'prop'
+  // static prop = 'prop'
 }
 
 module.exports = A

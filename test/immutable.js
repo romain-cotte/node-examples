@@ -1,5 +1,5 @@
-import should from 'should'
-import Immutable from 'immutable'
+const should = require('should')
+const Immutable = require('immutable')
 /**
  * See https://facebook.github.io/immutable-js/
  */

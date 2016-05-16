@@ -1,5 +1,5 @@
-import async from 'async'
-import should from 'should'
+const async = require('async')
+const should = require('should')
 
 /**
  * See https://github.com/caolan/async
