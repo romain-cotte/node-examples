@@ -54,14 +54,14 @@ describe('Class', () => {
     result.should.eql([1, 2, 3])
   })
 
-  // it('Symbol iterator method', () => {
-  //   const c = new C(1, 2, 3, 4)
-  //   const result = []
-  //   for (let x of c) {
-  //     result.push(x)
-  //   }
-  //   result.should.eql([1, 2, 3, 4])
-  // })
+  it('Symbol iterator method', () => {
+    const c = new C(1, 2, 3, 4)
+    const result = []
+    for (let x of c) {
+      result.push(x)
+    }
+    result.should.eql([1, 2, 3, 4])
+  })
 
   it('newInstance from staticMethod', () => {
     const a = A.newInstance()
