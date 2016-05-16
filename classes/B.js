@@ -1,3 +1,5 @@
+'use strict'
+
 const A = require('./A')
 
 class B extends A {

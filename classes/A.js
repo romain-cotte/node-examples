@@ -1,3 +1,5 @@
+'use strict'
+
 class A {
 
   // ?string may be null or undefined
