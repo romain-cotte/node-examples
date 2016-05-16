@@ -28,10 +28,9 @@ describe('Class', () => {
     A.staticMethod('abcd').should.eql('[abcd]')
   })
 
-  // Only with babel
-  // it('static property', () => {
-  //   A.prop.should.eql('prop')
-  // })
+  it('static property', () => {
+    A.prop.should.eql('prop')
+  })
 
   it('inheritance', () => {
     const b = new B()

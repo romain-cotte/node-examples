@@ -31,4 +31,6 @@ class A {
   // static prop = 'prop'
 }
 
+A.prop = 'prop'
+
 module.exports = A
