@@ -26,7 +26,7 @@ describe('arithmetic', () => {
   })
 
   it('and', () => {
-    // Warning the or binary is only one &
+    // Warning the AND binary is only one &
     const val1 = 22;              //    10110
     const val2 = 10;              //     1010
     (val1 & val2).should.eql(2); //        10

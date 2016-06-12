@@ -30,5 +30,16 @@ describe('Set', () => {
     // [...set].should.eql([1, 2, 3, 4])
   })
 
+  it('iterate through set', () => {
+    const initialArray = [1, 2, 3, 4]
+    set = new Set(initialArray);
+    let array = []
+    for (let item of set) {
+      array.push(item)
+    }
+    array.should.eql(initialArray)
+    Array.from(set).should.eql(initialArray)
+  })
+
 })
 
