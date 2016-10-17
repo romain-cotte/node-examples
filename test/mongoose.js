@@ -143,7 +143,7 @@ describe('Mongoose', () => {
       })
   })
 
-  it('should update a field and push a new value in pets array', done => {
+  it.skip('should update a field and push a new value in pets array', done => {
     User.update(
       { _id: user._id },
       { firstname: 'AAA', $push: { pets: 'dog' } }
