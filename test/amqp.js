@@ -37,7 +37,8 @@ describe('amqp', () => {
   })
 
   beforeEach(() => {
-    return channel.purgeQueue(queue)
+    return channel.purgeQueue(queue1)
+      .then(() => channel.purgeQueue(queue2))
   })
 
   it('send a message and consume it, 1 "Hello world" example', done => {
