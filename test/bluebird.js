@@ -23,4 +23,15 @@ describe('bluebird', () => {
         console.error('unable to read file, because: ', e.message) //eslint-disable-line
       })
   })
+
+  it('each', () => {
+    let v = 1
+    return Promise.each([1, 2], function (value) {
+      new Promise((resolve, reject) => {
+        value.should.eql(v++)
+        return resolve(value)
+      })
+    })
+  })
+
 })
