@@ -9,7 +9,7 @@ module.exports = sequelize => {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      defaultValue: 1
+      // defaultValue: 1
     },
     firstname: {
       type: Sequelize.STRING,

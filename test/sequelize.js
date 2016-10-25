@@ -3,7 +3,7 @@
 const should = require('should')
 const Sequelize = require('sequelize')
 
-describe('Sequelize', () => {
+describe.skip('Sequelize', () => {
   let Person
   let sequelize, transaction
   before(() => {
