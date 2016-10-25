@@ -1,12 +1,25 @@
 redis:
   image: redis:latest
+  container_name : redis
   ports:
     - "6379:6379"
 mongodb:
   image: mongo:latest
+  container_name : mongodb
   ports:
     - "27017:27017"
 rabbitmq:
   image: rabbitmq:latest
+  container_name : rabbitmq
   ports:
     - "5672:5672"
+postgres :
+  image : postgres:9.4.5
+  container_name : postgres
+  restart : always
+  ports :
+    - "5432:5432"
+  environment:
+    - POSTGRES_DB=postgres
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=

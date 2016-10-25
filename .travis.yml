@@ -9,6 +9,7 @@ services:
   - mongodb
   - redis-server
   - rabbitmq
+  - postgres
 
 install:
   - npm install -g mocha jshint
