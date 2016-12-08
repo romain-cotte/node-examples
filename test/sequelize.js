@@ -2,12 +2,13 @@
 
 const should = require('should')
 const Sequelize = require('sequelize')
+const CONFIG = require('../config')
 
-describe.skip('Sequelize', () => {
+describe('Sequelize', () => {
   let Person, person
   let sequelize, transaction
   before(() => {
-    sequelize = new Sequelize('postgres://postgres:@localhost:5432/postgres')
+    sequelize = new Sequelize(CONFIG.POSTGRES_URL)
     Person = require('../models/person')(sequelize)
     // let originalQueryFunction = Sequelize.prototype.query;
     // Sequelize.prototype.query = function (sql, options) {
@@ -23,7 +24,7 @@ describe.skip('Sequelize', () => {
   beforeEach('set transaction', () => {
     return sequelize.transaction()
       .then(_transaction => transaction = _transaction)
-  });
+  })
 
   it('create', () => {
     let personContent = {
@@ -38,6 +39,21 @@ describe.skip('Sequelize', () => {
     return Person.create(personContent)
       .then(_person => {
         person = _person
+      })
+  })
+
+  it('bulkCreate', () => {
+    let persons = []
+    for (let i = 0; i < 10; i++) {
+      persons.push({
+        firstname: 'Firstname' + i.toString(),
+        lastname: 'Lastname' + i.toString(),
+        age: i + 5
+      })
+    }
+    return Person.bulkCreate(persons)
+      .then(res => {
+        res.length.should.eql(10)
       })
   })
 
@@ -56,5 +72,13 @@ describe.skip('Sequelize', () => {
         _person.get('firstname').should.eql('NewFirstname')
       })
   })
+
+  // it('findOne with order', () => {
+  //   return Person.findOne({
+  //     order: [
+  //       []
+  //     ]
+  //   })
+  // })
 
 })
