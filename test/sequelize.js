@@ -1,5 +1,9 @@
 'use strict'
 
+if (process.env.NODE_ENV === 'production') {
+  console.error('You cannot run test on production environment')
+}
+
 const should = require('should')
 const Sequelize = require('sequelize')
 const CONFIG = require('../config')
@@ -18,6 +22,8 @@ describe('Sequelize', () => {
     //   }
     //   return originalQueryFunction.call(this, sql, options);
     // }
+
+    // This will not add new columns in the database !
     return sequelize.sync()
   })
 
@@ -26,11 +32,20 @@ describe('Sequelize', () => {
       .then(_transaction => transaction = _transaction)
   })
 
+  after('remove all persons', () => {
+    return Person.destroy({
+      where: {
+        tag: 'test'
+      }
+    })
+  })
+
   it('create', () => {
     let personContent = {
       firstname: 'firstname',
       lastname: 'lastname',
       age: 25,
+      tag: 'test'
       // location: [1, 2] // not working
       // location: { x: 1, y: 2 } // not working
       // location: { lat: 1, lng: 2 } // not working
@@ -47,8 +62,9 @@ describe('Sequelize', () => {
     for (let i = 0; i < 10; i++) {
       persons.push({
         firstname: 'Firstname' + i.toString(),
-        lastname: 'Lastname' + i.toString(),
-        age: i + 5
+        lastname: 'Lastname ' + i.toString(),
+        age: i + 5,
+        tag: 'test'
       })
     }
     return Person.bulkCreate(persons)
@@ -73,12 +89,23 @@ describe('Sequelize', () => {
       })
   })
 
-  // it('findOne with order', () => {
-  //   return Person.findOne({
-  //     order: [
-  //       []
-  //     ]
-  //   })
-  // })
+  it('findOne with order', () => {
+    return Person.findOne({
+      order: [
+        ['firstname', 'DESC']
+      ]
+    })
+    .then(_person => {
+      _person.get('lastname').should.eql('lastname')
+      return Person.findOne({
+        order: [
+          ['firstname', 'ASC']
+        ]
+      })
+    })
+    .then(_person => {
+      _person.get('lastname').should.eql('Lastname 0')
+    })
+  })
 
 })

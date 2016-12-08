@@ -1,4 +1,9 @@
 'use strict'
+/**
+ * Declaration of the schema
+ * Sequelize.STRING corresponds to character varying(255)
+ *
+ */
 
 const Sequelize = require('sequelize')
 
@@ -18,9 +23,14 @@ module.exports = sequelize => {
       type: Sequelize.STRING,
     },
     age: Sequelize.INTEGER,
+    tag: {
+      type: Sequelize.STRING,
+    }
     // location: 'Point'
     // location: Sequelize.GEOMETRY('POINT')
   }, {
-    tableName: 'persons'
-  });
-};
+    tableName: 'persons',
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  })
+}

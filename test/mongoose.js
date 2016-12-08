@@ -50,7 +50,7 @@ describe('Mongoose', () => {
       })
   })
 
-  it('should throw error on a bad ObjectId', done => {
+  it.skip('should throw error on a bad ObjectId', done => {
     User.findOne({ _id: 'badObjectId' })
       .then(done)
       .catch(err => {
