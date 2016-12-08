@@ -23,7 +23,8 @@ describe('Sequelize', () => {
     //   return originalQueryFunction.call(this, sql, options);
     // }
 
-    // This will not add new columns in the database !
+    // This will not add new columns in the database! However, new indexes
+    // will be created during the synchronization.
     return sequelize.sync()
   })
 

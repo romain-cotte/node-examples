@@ -31,6 +31,10 @@ module.exports = sequelize => {
   }, {
     tableName: 'persons',
     createdAt: 'created_at',
-    updatedAt: 'updated_at'
+    updatedAt: 'updated_at',
+    indexes: [
+      { unique: false, fields: [ 'age' ] },
+      { unique: false, fields: [ 'firstname' ] }
+    ]
   })
 }
