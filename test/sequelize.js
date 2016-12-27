@@ -36,7 +36,7 @@ describe('Sequelize', () => {
   after('remove all persons', () => {
     return Person.destroy({
       where: {
-        tag: 'test'
+        tags: { $contains: ['unit_test'] }
       }
     })
   })
@@ -46,7 +46,7 @@ describe('Sequelize', () => {
       firstname: 'firstname',
       lastname: 'lastname',
       age: 25,
-      tag: 'test'
+      tags: ['unit_test']
       // location: [1, 2] // not working
       // location: { x: 1, y: 2 } // not working
       // location: { lat: 1, lng: 2 } // not working
@@ -65,7 +65,7 @@ describe('Sequelize', () => {
         firstname: 'Firstname' + i.toString(),
         lastname: 'Lastname ' + i.toString(),
         age: i + 5,
-        tag: 'test'
+        tags: ['unit_test']
       })
     }
     return Person.bulkCreate(persons)
@@ -75,8 +75,6 @@ describe('Sequelize', () => {
   })
 
   it('update', () => {
-    console.log('person.get id', person.get('id'))
-
     return Person.update(
       { firstname: 'NewFirstname' },
       { where: { id: person.get('id') } }

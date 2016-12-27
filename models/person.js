@@ -23,8 +23,8 @@ module.exports = sequelize => {
       type: Sequelize.STRING,
     },
     age: Sequelize.INTEGER,
-    tag: {
-      type: Sequelize.STRING,
+    tags: {
+      type: Sequelize.ARRAY(Sequelize.STRING(64)),
     }
     // location: 'Point'
     // location: Sequelize.GEOMETRY('POINT')
