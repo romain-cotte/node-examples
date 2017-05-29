@@ -3,9 +3,8 @@
 const mongoose = require('mongoose')
 const should = require('should')
 const User = require('../models').User
-const qPromise = require('q').Promise
 
-mongoose.Promise = qPromise
+mongoose.Promise = require('bluebird')
 const ObjectId = mongoose.Types.ObjectId
 
 describe('Mongoose', () => {
@@ -26,7 +25,7 @@ describe('Mongoose', () => {
   beforeEach(done => {
     user = new User(userContent)
     User.remove()
-      .then(user.save)
+      .then(() => user.save())
       .then(() => { done() })
       .catch(done)
   })
@@ -36,7 +35,7 @@ describe('Mongoose', () => {
   })
 
   it('should create an ObjectId', () => {
-    (typeof ObjectId.createPk()).should.eql('object')
+    (typeof new mongoose.Types.ObjectId()).should.eql('object')
   })
 
   it('should create several users', done => {
@@ -64,7 +63,7 @@ describe('Mongoose', () => {
   })
 
   it('should not find document with a wrong ObjectId', done => {
-    User.findOne({ _id: ObjectId.createPk() })
+    User.findOne({ _id: new mongoose.Types.ObjectId() })
       .then(u => {
         should.not.exist(u)
         done()
@@ -73,7 +72,7 @@ describe('Mongoose', () => {
   })
 
   it('should not find users with a wrong ObjectId', done => {
-    User.find({ _id: ObjectId.createPk() })
+    User.find({ _id: new mongoose.Types.ObjectId() })
       .then(users => {
         users.should.eql([])
         done()
@@ -123,7 +122,7 @@ describe('Mongoose', () => {
   })
 
   it('should save a user with a specific _id', done => {
-    userContent._id = ObjectId.createPk()
+    userContent._id = new mongoose.Types.ObjectId()
     const user = new User(userContent)
     user.save()
       .then(u => {
