@@ -1,7 +1,7 @@
 node-examples
 =============
-[![Build Status](https://img.shields.io/travis/LilMeyer/node-examples/master.svg?style=flat-square)](https://travis-ci.org/LilMeyer/node-examples)
-[![Dependency Status](https://img.shields.io/david/LilMeyer/node-examples/master.svg?style=flat-square)](https://david-dm.org/lilmeyer/node-examples)
+[![Build Status](https://img.shields.io/travis/romain-cotte/node-examples/master.svg?style=flat-square)](https://travis-ci.org/romain-cotte/node-examples)
+[![Dependency Status](https://img.shields.io/david/romain-cotte/node-examples/master.svg?style=flat-square)](https://david-dm.org/romain-cotte/node-examples)
 
 
 
