@@ -4,7 +4,7 @@
   "version": "0.0.5",
   "main": "main.js",
   "dependencies": {
-    "amqplib": "0.4.1",
+    "amqplib": "0.5.1",
     "async": "^2.1.2",
     "bluebird": "^3.3.3",
     "co": "^4.6.0",
@@ -18,8 +18,8 @@
     "redis": "2.6.1",
     "request": "^2.75.0",
     "request-promise": "4.1.1",
-    "sequelize": "^3.24.6",
-    "sinon": "^1.17.3"
+    "sequelize": "^4.0.0-2",
+    "sinon": "^2.3.2"
   },
   "engines": {
     "node": ">=5",

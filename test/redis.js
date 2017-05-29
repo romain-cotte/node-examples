@@ -118,8 +118,8 @@ describe('Redis', () => {
     }
     async.waterfall([
       next => {
-        client.hmset(key, 'property1', 'value1',
-         'property2', 'value2', 'property3', 'value3', next)
+        client.hmset([key, 'property1', 'value1',
+         'property2', 'value2', 'property3', 'value3'], next)
       },
       (result, next) => {
         client.hgetall(key, next)
