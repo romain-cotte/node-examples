@@ -6,16 +6,15 @@ const should = require('should')
 describe('Sinon', () => {
 
   describe('Sync function', () => {
-    const f = {
-      incr: i => i + 1
-    }
+    let f
+    beforeEach(() => { f = { incr: i => i + 1 } })
 
     it('f', () => {
       f.incr(1).should.eql(2)
     })
 
     it('stub the function', () => {
-      const stub = sinon.stub(f, 'incr', i => i + 3)
+      const stub = sinon.stub(f, 'incr').callsFake(i => i + 3)
       f.incr(1).should.eql(4)
       sinon.assert.calledOnce(stub);
       stub.restore() // could be f.incr.restore()
