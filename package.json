@@ -26,7 +26,7 @@
     "npm": ">=3.5.1"
   },
   "scripts": {
-    "test": "make test"
+    "test": "mocha"
   },
   "private": true,
   "devDependencies": {
