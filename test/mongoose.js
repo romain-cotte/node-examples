@@ -18,107 +18,72 @@ describe('Mongoose', () => {
     }
   }
 
-  before(() => {
-    mongoose.connect('localhost:27017/node-examples')
-  })
+  before(() => mongoose.connect('localhost:27017/node-examples'))
 
-  beforeEach(done => {
+  beforeEach(async () => {
     user = new User(userContent)
-    User.remove()
-      .then(() => user.save())
-      .then(() => { done() })
-      .catch(done)
+    await User.remove()
+    return user.save()
   })
 
-  after(() => {
-    mongoose.disconnect()
-  })
+  after(() => mongoose.disconnect())
 
   it('should create an ObjectId', () => {
     (typeof new mongoose.Types.ObjectId()).should.eql('object')
   })
 
-  it('should create several users', done => {
-    User.create([userContent, userContent])
-      .then(() => {
-        return User.count()
-      })
-      .then(c => {
-        c.should.eql(3)
-        done()
-      })
+  it('should create several users', async () => {
+    await User.create([userContent, userContent])
+    const count = await User.count()
+    count.should.eql(3)
   })
 
-  it.skip('should throw error on a bad ObjectId', done => {
-    User.findOne({ _id: 'badObjectId' })
-      .then(done)
-      .catch(err => {
-        err.message.should.eql('Cast to ObjectId failed for value "badObjectId" at path "_id"')
-        err.name.should.eql('CastError')
-        err.kind.should.eql('ObjectId')
-        err.value.should.eql('badObjectId')
-        err.path.should.eql('_id')
-        done()
-      })
+  it('should throw error on a bad ObjectId', async () => {
+    try {
+      const user = await User.findOne({ _id: 'badObjectId' })
+    } catch (err) {
+      err.message.should.eql('Cast to ObjectId failed for value "badObjectId" at path "_id" for model "User"')
+      err.name.should.eql('CastError')
+      err.kind.should.eql('ObjectId')
+      err.value.should.eql('badObjectId')
+      err.path.should.eql('_id')
+    }
   })
 
-  it('should not find document with a wrong ObjectId', done => {
-    User.findOne({ _id: new mongoose.Types.ObjectId() })
-      .then(u => {
-        should.not.exist(u)
-        done()
-      })
-      .catch(done)
+  it('should not find document with a wrong ObjectId', async () => {
+    const u = await User.findOne({ _id: new mongoose.Types.ObjectId() })
+    should.not.exist(u)
   })
 
-  it('should not find users with a wrong ObjectId', done => {
-    User.find({ _id: new mongoose.Types.ObjectId() })
-      .then(users => {
-        users.should.eql([])
-        done()
-      })
-      .catch(done)
+  it('should not find users with a wrong ObjectId', async () => {
+    const users = await User.find({ _id: new mongoose.Types.ObjectId() })
+    users.should.eql([])
   })
 
-  it('should find one user', done => {
-    User.findOne({ _id: user._id })
-      .then(u => {
-        u.firstname.should.eql(userContent.firstname)
-        u.lastname.should.eql(userContent.lastname)
-        u.address.city.should.eql(userContent.address.city)
-        u.address.street.should.eql(userContent.address.street)
-        done()
-      })
+  it('should find one user', async () => {
+    const res = await User.findOne({ _id: user._id })
+    res.firstname.should.eql(userContent.firstname)
+    res.lastname.should.eql(userContent.lastname)
+    res.address.city.should.eql(userContent.address.city)
+    res.address.street.should.eql(userContent.address.street)
   })
 
-  it('should find one user - with a string instead of a ObjectId => it works !', done => {
-    User.findOne({ _id: user._id.toString() })
-      .then(u => {
-        u.firstname.should.eql(userContent.firstname)
-        u.lastname.should.eql(userContent.lastname)
-        done()
-      })
-      .catch(done)
+  it('should find one user - with a string instead of a ObjectId => it works !', async () => {
+    const res = await User.findOne({ _id: user._id.toString() })
+    res.firstname.should.eql(userContent.firstname)
+    res.lastname.should.eql(userContent.lastname)
   })
 
-  it('should find a user by id', done => {
-    User.findById(user._id.toString())
-      .then(u => {
-        u.firstname.should.eql(userContent.firstname)
-        u.lastname.should.eql(userContent.lastname)
-        done()
-      })
-      .catch(done)
+  it('should find a user by id', async () => {
+    const u = await User.findById(user._id.toString())
+    u.firstname.should.eql(userContent.firstname)
+    u.lastname.should.eql(userContent.lastname)
   })
 
-  it('should save', done => {
+  it('should save', async () => {
     const user = new User(userContent)
-    user.save()
-      .then(u => {
-        should.exist(u)
-        done()
-      })
-      .catch(done)
+    const u = await user.save()
+    should.exist(u)
   })
 
   it('should save a user with a specific _id', done => {
@@ -132,14 +97,13 @@ describe('Mongoose', () => {
       .catch(done)
   })
 
-  it('should update', done => {
-    User.update({ _id: user._id },
-                { firstname: 'newFirstname' })
-      .then(r => {
-        r.ok.should.eql(1)
-        r.n.should.eql(1)
-        done()
-      })
+  it('should update', async () => {
+    const r = await User.update(
+        { _id: user._id },
+        { firstname: 'newFirstname' }
+      )
+    r.ok.should.eql(1)
+    r.n.should.eql(1)
   })
 
   it.skip('should update a field and push a new value in pets array', done => {
@@ -158,13 +122,9 @@ describe('Mongoose', () => {
     .catch(done)
   })
 
-  it('should return user count', done => {
-    User.count({})
-      .then(c => {
-        c.should.eql(1)
-        done()
-      })
-      .catch(done)
+  it('should return user count', async () => {
+    const c = await User.count({})
+    c.should.eql(1)
   })
 
   it('stream', done => {
@@ -184,14 +144,11 @@ describe('Mongoose', () => {
     })
   })
 
-  it('should remove the user', done => {
-    user.remove()
-      .then(r => {
-        r.firstname.should.eql(user.firstname)
-        r.lastname.should.eql(user.lastname)
-        r._id.should.eql(user._id)
-        done()
-      })
+  it('should remove the user', async () => {
+    const r = await user.remove()
+    r.firstname.should.eql(user.firstname)
+    r.lastname.should.eql(user.lastname)
+    r._id.should.eql(user._id)
   })
 
 })
