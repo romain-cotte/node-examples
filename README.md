@@ -1,9 +1,10 @@
-node-examples
-=============
-[![Build Status](https://img.shields.io/travis/romain-cotte/node-examples/master.svg?style=flat-square)](https://travis-ci.org/romain-cotte/node-examples)
-[![Dependency Status](https://img.shields.io/david/romain-cotte/node-examples/master.svg?style=flat-square)](https://david-dm.org/romain-cotte/node-examples)
-
-
+<h1 align=center>node-examples</h1>
+<p align=center>
+  <a href="https://travis-ci.org/romain-cotte/node-examples"><img src="https://img.shields.io/travis/romain-cotte/node-examples/master.svg?style=flat-square" alt="Build Status"></a>
+  <a href="https://david-dm.org/romain-cotte/node-examples"><img src="https://img.shields.io/david/romain-cotte/node-examples/master.svg?style=flat-square" alt="Dependency Status"></a>
+  [![Build Status](https://img.shields.io/travis/romain-cotte/node-examples/master.svg?style=flat-square)](https://travis-ci.org/romain-cotte/node-examples)
+  [![Dependency Status](https://img.shields.io/david/romain-cotte/node-examples/master.svg?style=flat-square)](https://david-dm.org/romain-cotte/node-examples)
+</p>
 
 References
 ---
