@@ -1,19 +1,19 @@
-'use strict'
+'use strict';
 
-const A = require('../classes/A.js')
-const B = require('../classes/B.js')
-const C = require('../classes/C.js')
+const A = require('../classes/A.js');
+const B = require('../classes/B.js');
+const C = require('../classes/C.js');
 
-const staticA = require('../classes/StaticA.js')
+const staticA = require('../classes/StaticA.js');
 const should = require('should') //eslint-disable-line
 
 describe('Class', () => {
 
   it('default constructor', () => {
-    const a = new A()
-    a.toString().should.eql('Your string is hello')
-    a.toNumber().should.eql(0)
-  })
+    const a = new A();
+    a.toString().should.eql('Your string is hello');
+    a.toNumber().should.eql(0);
+  });
 
   // Only with flow typing
   // it('constructor with wrong parameter', () => {
@@ -25,50 +25,50 @@ describe('Class', () => {
   // })
 
   it('static method', () => {
-    A.staticMethod('abcd').should.eql('[abcd]')
-  })
+    A.staticMethod('abcd').should.eql('[abcd]');
+  });
 
   it('static property', () => {
-    A.prop.should.eql('prop')
-  })
+    A.prop.should.eql('prop');
+  });
 
   it('inheritance', () => {
-    const b = new B()
-    b.toString().should.eql('Inside B, your string is hello')
-    b.should.be.an.instanceOf(A)
-    b.should.be.an.instanceOf(B)
-  })
+    const b = new B();
+    b.toString().should.eql('Inside B, your string is hello');
+    b.should.be.an.instanceOf(A);
+    b.should.be.an.instanceOf(B);
+  });
 
   it('super method', () => {
-    const b = new B()
-    b.toStringFromSuper().should.eql('Your string is hello!!!')
-  })
+    const b = new B();
+    b.toStringFromSuper().should.eql('Your string is hello!!!');
+  });
 
   it('Symbol.iterator method', () => {
-    const b = new B()
-    const result = []
+    const b = new B();
+    const result = [];
     for (let x of b) {
-      result.push(x)
+      result.push(x);
     }
-    result.should.eql([1, 2, 3])
-  })
+    result.should.eql([1, 2, 3]);
+  });
 
   it('Symbol iterator method', () => {
-    const c = new C(1, 2, 3, 4)
-    const result = []
+    const c = new C(1, 2, 3, 4);
+    const result = [];
     for (let x of c) {
-      result.push(x)
+      result.push(x);
     }
-    result.should.eql([1, 2, 3, 4])
-  })
+    result.should.eql([1, 2, 3, 4]);
+  });
 
   it('newInstance from staticMethod', () => {
-    const a = A.newInstance()
-    a.toString().should.eql('Your string is from newInstance')
-  })
+    const a = A.newInstance();
+    a.toString().should.eql('Your string is from newInstance');
+  });
 
   it('static class', () => {
-    staticA.toString().should.eql('Your string is from static class')
-  })
+    staticA.toString().should.eql('Your string is from static class');
+  });
 
-})
+});

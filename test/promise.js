@@ -1,37 +1,35 @@
-'use strict'
-
-const should = require('should')
+const should = require('should'); // eslint-disable-line
 
 describe('Promise', () => {
 
   it('new Promise', done => {
-    let p = new Promise((resolve, reject) => {
+    let p = new Promise((resolve, _reject) => {
       setTimeout(() => {
-        resolve(10)
-      }, 30)
-    })
+        resolve(10);
+      }, 30);
+    });
     p.then(res => {
-      res.should.eql(10)
-      done()
-    })
-  })
+      res.should.eql(10);
+      done();
+    });
+  });
 
   it('shortcut', done => {
     Promise.resolve(10)
       .then(r => {
-        r.should.eql(10)
-        done()
-      })
-  })
+        r.should.eql(10);
+        done();
+      });
+  });
 
   it('throw error', done => {
     Promise.resolve()
       .then(() => {
-        throw new Error('error')
+        throw new Error('error');
       })
-      .catch(e => {
-        done()
-      })
-  })
+      .catch(() => {
+        done();
+      });
+  });
 
-})
+});

@@ -1,15 +1,15 @@
-'use strict'
+'use strict';
 
 class StaticA {
 
   constructor() {
-    this.str = 'from static class'
+    this.str = 'from static class';
   }
 
   toString() {
-    return `Your string is ${this.str}`
+    return `Your string is ${this.str}`;
   }
 
 }
 
-module.exports = new StaticA()
+module.exports = new StaticA();

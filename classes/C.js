@@ -1,14 +1,14 @@
-'use strict'
+'use strict';
 
 class C {
   constructor(...args) {
-    this.args = args
+    this.args = args;
   }
   * [Symbol.iterator] () {
     for (let arg of this.args) {
-      yield arg
+      yield arg;
     }
   }
 }
 
-module.exports = C
+module.exports = C;

@@ -1,15 +1,15 @@
-'use strict'
+'use strict';
 
-const A = require('./A')
+const A = require('./A');
 
 class B extends A {
   /* Overwrite A's method */
   constructor() {
-    super()
+    super();
   }
 
   toString() {
-    return `Inside B, your string is ${this.str}`
+    return `Inside B, your string is ${this.str}`;
   }
 
   toStringFromSuper () {
@@ -17,10 +17,10 @@ class B extends A {
   }
 
   * [Symbol.iterator] () {
-    yield 1
-    yield 2
-    yield 3
+    yield 1;
+    yield 2;
+    yield 3;
   }
 }
 
-module.exports = B
+module.exports = B;

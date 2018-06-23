@@ -1,11 +1,11 @@
-'use strict'
+'use strict';
 /**
  * Declaration of the schema
  * Sequelize.STRING corresponds to character varying(255)
  *
  */
 
-const Sequelize = require('sequelize')
+const Sequelize = require('sequelize');
 
 module.exports = sequelize => {
   return sequelize.define('Person', {
@@ -36,5 +36,5 @@ module.exports = sequelize => {
       { unique: false, fields: [ 'age' ] },
       { unique: false, fields: [ 'firstname' ] }
     ]
-  })
-}
+  });
+};

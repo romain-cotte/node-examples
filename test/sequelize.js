@@ -1,19 +1,19 @@
-'use strict'
-
 if (process.env.NODE_ENV === 'production') {
-  console.error('You cannot run test on production environment')
+  throw new Error('You cannot run test on production environment');
 }
 
-const should = require('should')
-const Sequelize = require('sequelize')
-const CONFIG = require('../config')
+const Sequelize = require('sequelize');
+const should = require('should'); // eslint-disable-line
+
+const CONFIG = require('../config');
 
 describe('Sequelize', () => {
-  let Person, person
-  let sequelize, transaction
+  let Person, person;
+  let sequelize;
+  // let transaction;
   before(() => {
-    sequelize = new Sequelize(CONFIG.POSTGRES_URL)
-    Person = require('../models/person')(sequelize)
+    sequelize = new Sequelize(CONFIG.POSTGRES_URL);
+    Person = require('../models/person')(sequelize);
     // let originalQueryFunction = Sequelize.prototype.query;
     // Sequelize.prototype.query = function (sql, options) {
     //   options = options || {};
@@ -25,21 +25,21 @@ describe('Sequelize', () => {
 
     // This will not add new columns in the database! However, new indexes
     // will be created during the synchronization.
-    return sequelize.sync()
-  })
+    return sequelize.sync();
+  });
 
   beforeEach('set transaction', () => {
-    return sequelize.transaction()
-      .then(_transaction => transaction = _transaction)
-  })
+    return sequelize.transaction();
+      // .then(_transaction => transaction = _transaction);
+  });
 
   after('remove all persons', () => {
     return Person.destroy({
       where: {
         tags: { $contains: ['unit_test'] }
       }
-    })
-  })
+    });
+  });
 
   it('create', () => {
     let personContent = {
@@ -51,28 +51,28 @@ describe('Sequelize', () => {
       // location: { x: 1, y: 2 } // not working
       // location: { lat: 1, lng: 2 } // not working
       // location: 'POINT(-71.064544 42.28787)' // not working
-    }
+    };
     return Person.create(personContent)
       .then(_person => {
-        person = _person
-      })
-  })
+        person = _person;
+      });
+  });
 
   it('bulkCreate', () => {
-    let persons = []
+    let persons = [];
     for (let i = 0; i < 10; i++) {
       persons.push({
         firstname: 'Firstname' + i.toString(),
         lastname: 'Lastname ' + i.toString(),
         age: i + 5,
         tags: ['unit_test']
-      })
+      });
     }
     return Person.bulkCreate(persons)
       .then(res => {
-        res.length.should.eql(10)
-      })
-  })
+        res.length.should.eql(10);
+      });
+  });
 
   it('update', () => {
     return Person.update(
@@ -80,13 +80,13 @@ describe('Sequelize', () => {
       { where: { id: person.get('id') } }
     )
       .then(res => {
-        res[0].should.eql(1)
-        return Person.findOne({ where: { id: person.get('id') } })
+        res[0].should.eql(1);
+        return Person.findOne({ where: { id: person.get('id') } });
       })
       .then(_person => {
-        _person.get('firstname').should.eql('NewFirstname')
-      })
-  })
+        _person.get('firstname').should.eql('NewFirstname');
+      });
+  });
 
   it('findOne with order', () => {
     return Person.findOne({
@@ -95,16 +95,16 @@ describe('Sequelize', () => {
       ]
     })
     .then(_person => {
-      _person.get('lastname').should.eql('lastname')
+      _person.get('lastname').should.eql('lastname');
       return Person.findOne({
         order: [
           ['firstname', 'ASC']
         ]
-      })
+      });
     })
     .then(_person => {
-      _person.get('lastname').should.eql('Lastname 0')
-    })
-  })
+      _person.get('lastname').should.eql('Lastname 0');
+    });
+  });
 
-})
+});
