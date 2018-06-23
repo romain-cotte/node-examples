@@ -7,13 +7,12 @@ const client = dgram.createSocket('udp4');
 const should = require('should') //eslint-disable-line
 const PORT = 41234;
 
-describe('UDP', () => {
+describe.skip('UDP', () => {
 
   before(() => {
     server.on('listening', () => {
       /*const address =*/ server.address();
     });
-
     server.bind(PORT);
   });
 

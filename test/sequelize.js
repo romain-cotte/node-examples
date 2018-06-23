@@ -7,7 +7,7 @@ const should = require('should'); // eslint-disable-line
 
 const CONFIG = require('../config');
 
-describe('Sequelize', () => {
+describe.skip('Sequelize', () => {
   let Person, person;
   let sequelize;
   // let transaction;

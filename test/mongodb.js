@@ -1,41 +1,33 @@
 const mongodb = require('mongodb');
 const should = require('should');
+const { expect } = require('chai');
 
-const url = 'mongodb://localhost:27017/node-examples';
+const url = 'mongodb://localhost:27017';
 
 describe('Mongodb', () => {
-  let db, collection;
+  let client, collection;
+  let shared;
 
   before(async () => {
-    db = await mongodb.MongoClient.connect(url);
-    collection = db.collection('documents');
+    client = await mongodb.MongoClient.connect(url);
+    collection = client.db('node-examples').collection('documents');
+    shared = {};
   });
 
-  after(() => db.close());
+  after(() => client.close());
 
   beforeEach(async () => {
     await collection.remove()
-    await collection.insert([{ a : 1 }, { a : 2 }, { a : 3 }]);
+    shared.documents = await collection.insert([{ a : 1 }, { a : 2 }, { a : 3 }]);
   });
 
-  it('should insert 3 documents into the document collection', done => {
-    collection
-      .insert([
-        { a : 1 }, { a : 2 }, { a : 3 }
-      ], (err, result) => {
-        should.not.exist(err);
-        result.result.n.should.eql(3);
-        result.ops.length.should.eql(3);
-        done();
-      });
+  it('should insert 3 documents into the document collection', async () => {
+    expect(shared.documents.insertedCount).to.eql(3);
   });
 
-  it('should retrieve documents of document collection', done => {
-    collection.find({ a: 1 }).toArray((err, documents) => {
-      should.not.exist(err);
-      documents.length.should.eql(1);
-      done();
-    });
+  it('should retrieve documents of document collection', async () => {
+    const documents = await collection.find({ a: 1 }).toArray();
+    expect(documents.length).to.eql(1)
   });
 
   it('should update a document', done => {
