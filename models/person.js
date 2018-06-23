@@ -1,10 +1,8 @@
-'use strict';
 /**
  * Declaration of the schema
  * Sequelize.STRING corresponds to character varying(255)
  *
  */
-
 const Sequelize = require('sequelize');
 
 module.exports = sequelize => {

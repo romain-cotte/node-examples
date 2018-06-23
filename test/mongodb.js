@@ -1,5 +1,5 @@
 const mongodb = require('mongodb');
-const should = require('should');
+const should = require('should'); // eslint-disable-line
 const { expect } = require('chai');
 
 const url = 'mongodb://localhost:27017';
@@ -17,7 +17,7 @@ describe('Mongodb', () => {
   after(() => client.close());
 
   beforeEach(async () => {
-    await collection.remove()
+    await collection.remove();
     shared.documents = await collection.insert([{ a : 1 }, { a : 2 }, { a : 3 }]);
   });
 
@@ -27,7 +27,7 @@ describe('Mongodb', () => {
 
   it('should retrieve documents of document collection', async () => {
     const documents = await collection.find({ a: 1 }).toArray();
-    expect(documents.length).to.eql(1)
+    expect(documents.length).to.eql(1);
   });
 
   it('should update a document', done => {

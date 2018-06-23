@@ -1,5 +1,3 @@
-'use strict';
-
 const async = require('async');
 const redis = require('redis');
 const should = require('should');
