@@ -1,6 +1,3 @@
-'use strict';
-
-const async = require('async');
 const mongodb = require('mongodb');
 const should = require('should');
 
@@ -9,30 +6,16 @@ const url = 'mongodb://localhost:27017/node-examples';
 describe('Mongodb', () => {
   let db, collection;
 
-  before(done => {
-    async.waterfall([
-      next => {
-        /* Database connection */
-        mongodb.MongoClient.connect(url, next);
-      },
-      (_db, next) => {
-        db = _db;
-        collection = db.collection('documents');
-        /* Remove all documents for tests */
-        collection.remove({}, next);
-      }
-    ], done);
+  before(async () => {
+    db = await mongodb.MongoClient.connect(url);
+    collection = db.collection('documents');
   });
 
-  after(() => {
-    db.close();
-  });
+  after(() => db.close());
 
-  beforeEach(done => {
-    collection.remove()
-      .then(() => collection.insert([{ a : 1 }, { a : 2 }, { a : 3 }]))
-      .then(() => done())
-      .catch(done);
+  beforeEach(async () => {
+    await collection.remove()
+    await collection.insert([{ a : 1 }, { a : 2 }, { a : 3 }]);
   });
 
   it('should insert 3 documents into the document collection', done => {
