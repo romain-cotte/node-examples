@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const should = require('should');
+
 mongoose.Promise = require('bluebird');
 
-const User = require('../models').User;
+const { User } = require('../models');
 
 describe('Mongoose', () => {
   let user;
@@ -15,7 +16,10 @@ describe('Mongoose', () => {
     }
   };
 
-  before(() => mongoose.connect('localhost:27017/node-examples'));
+  before(() => mongoose.connect(
+    'mongodb://localhost:27017/node-examples',
+    { useNewUrlParser: true }
+  ));
 
   beforeEach(async () => {
     user = new User(userContent);
@@ -31,7 +35,7 @@ describe('Mongoose', () => {
 
   it('should create several users', async () => {
     await User.create([userContent, userContent]);
-    const count = await User.count();
+    const count = await User.countDocuments();
     count.should.eql(3);
   });
 
@@ -120,7 +124,7 @@ describe('Mongoose', () => {
   });
 
   it('should return user count', async () => {
-    const c = await User.count({});
+    const c = await User.countDocuments({});
     c.should.eql(1);
   });
 

@@ -1,6 +1,9 @@
 const async = require('async');
+const Promise = require('bluebird');
 const redis = require('redis');
-const should = require('should');
+const { expect } = require('chai');
+
+Promise.promisifyAll(redis);
 
 describe('Redis', () => {
   let client;
@@ -10,123 +13,67 @@ describe('Redis', () => {
       console.log('Error', err) //eslint-disable-line
     });
   });
+  after(() => client.quit());
 
-  after(() => {
-    client.quit();
-  });
+  beforeEach(async () => client.flushdb());
 
-  it('set - get', done => {
+  it('set - get', async () => {
     const key = 'key', value = 'value';
-    async.waterfall([
-      next => {
-        client.set(key, value, next);
-      },
-      (res, next) => {
-        res.should.eql('OK');
-        client.get(key, next);
-      }
-    ], (err, result) => {
-      should.not.exist(err);
-      result.should.eql(value);
-      done();
-    });
+    const res = await client.setAsync(key, value);
+    expect(res).to.eql('OK');
+    const result = await client.getAsync(key);
+    expect(result).to.eql(value);
   });
 
-  it('incr', done => {
+  it('incr', async () => {
     let key = 'key0', value = 1;
-    async.waterfall([
-      next => {
-        client.set(key, value, next);
-      },
-      (res, next) => {
-        res.should.eql('OK');
-        client.incr(key, next);
-      }
-    ], (err, result) => {
-      should.not.exist(err);
-      result.should.eql(++value);
-      done();
-    });
+    await client.setAsync(key, value);
+    const result = await client.incrAsync(key);
+    expect(result).to.eql(++value);
   });
 
-  it('should delete a key', done => {
+  it('should delete a key', async () => {
     const key = 'key';
     const value = 'value';
-    async.waterfall([
-      next => {
-        client.set(key, value, next);
-      },
-      (res, next) => {
-        client.del(key, next);
-      },
-      (res, next) => {
-        client.get(key, next);
-      }
-    ], (err, res) => {
-      (res === null).should.be.true();
-      done();
-    });
+    await client.setAsync(key, value);
+    await client.delAsync(key);
+    const res = await client.getAsync(key);
+    expect(res).to.eql(null);
   });
 
-  it('first incr', done => {
+  it('first incr', async () => {
     const key = 'key1';
-    async.waterfall([
-      next => {
-        client.del(key, next);
-      },
-      (res, next) => {
-        client.incr(key, next);
-      }
-    ], (err, res) => {
-      res.should.eql(1);
-      done();
-    });
+    await client.delAsync(key);
+    const res = await client.incrAsync(key);
+    expect(res).to.eql(1);
   });
 
-  it('storing hash', done => {
+  it('storing hash', async () => {
     const key = 'key 0';
-    async.waterfall([
-      next => {
-        client.del(key, next);
-      },
-      (r, next) => {
-        client.hset(key, 'property', 'value', next);
-      },
-      (res, next) => {
-        res.should.eql(1);
-        client.hkeys(key, next);
-      },
-      (res, next) => {
-        res.should.eql(['property']);
-        client.hgetall(key, next);
-      }
-    ], (err, result) => {
-      should.not.exist(err);
-      result.should.eql({ property: 'value' });
-      done();
-    });
+    await client.delAsync(key);
+    let res = await client.hsetAsync(key, 'property', 'value');
+    expect(res).to.eql(1);
+    res = await client.hkeysAsync(key);
+    expect(res).to.eql(['property']);
+    res = await client.hgetallAsync(key);
+    expect(res).to.eql({ property: 'value' });
   });
 
-  it('storing hash', done => {
+  it('storing hash', async () => {
     const key = 'key A';
     const obj = {
       property1: 'value1',
       property2: 'value2',
       property3: 'value3'
     };
-    async.waterfall([
-      next => {
-        client.hmset([key, 'property1', 'value1',
-         'property2', 'value2', 'property3', 'value3'], next);
-      },
-      (result, next) => {
-        client.hgetall(key, next);
-      }
-    ], (err, result) => {
-      should.not.exist(err);
-      result.should.eql(obj);
-      done();
-    });
+    let res = await client.hmsetAsync([
+      key,
+      'property1', 'value1',
+      'property2', 'value2',
+      'property3', 'value3'
+    ]);
+    res = await client.hgetallAsync(key);
+    expect(res).to.eql(obj);
   });
 
   describe('storing nested object', () => {
@@ -137,96 +84,37 @@ describe('Redis', () => {
       key3: { subKey: new Date().getTime() }
     };
 
-    it('can\'t storing nested objects', done => {
-      async.waterfall([
-        next => {
-          client.del(key, next);
-        },
-        (result/* type number */, next) => {
-          [ 0, 1 ].indexOf(result).should.be.above(-1);
-          client.hmset(key, obj, next);
-        },
-        (result, next) => {
-          result.should.equal('OK');
-          client.hgetall(key, next);
-        }
-      ], (err, result) => {
-        should.not.exist(err);
-        result.key1.should.eql(obj.key1);
-        /* result.key2.subKey is undefined */
-        done();
-      });
-    });
-
-    it('storing nested objects in a string', done => {
-      const prop = 'prop';
-      async.waterfall([
-        next => {
-          client.del(key, next);
-        },
-        (result, next) => {
-          client.hset(key, prop, JSON.stringify(obj), next);
-        },
-        (result, next) => {
-          result.should.equal(1);
-          client.hget(key, prop, next);
-        }
-      ], (err, result) => {
-        should.not.exist(err);
-        result.should.eql(JSON.stringify(obj));
-        const r = JSON.parse(result);
-        /* Dates have to be converted */
-        r.key3.subkey = new Date(parseFloat(r.key3.subKey));
-        done();
-      });
-    });
-
-    it('storing nested objects in a string--', done => {
-      const object = { id1: JSON.stringify(obj) };
-      async.waterfall([
-        next => {
-          client.del(key, next);
-        },
-        (result, next) => {
-          client.hmset(key, object, next);
-        },
-        (result, next) => {
-          result.should.equal('OK');
-          client.hgetall(key, next);
-        }
-      ], (err, result) => {
-        should.not.exist(err);
-        result.should.eql(object);
-        done();
-      });
-    });
-
-    it('hmset does not overwrite other properties', done => {
+    it('hmset does not overwrite other properties', async () => {
       const object = { startingProp1: 1, startingProp2: 2 };
-      async.waterfall([
-        next => {
-          client.del(key, next);
-        },
-        (res, next) => {
-          client.hmset(key, object, next);
-        },
-        (result, next) => {
-          result.should.equal('OK');
-          client.hmset(key, { nextProp1: 3, nextProp2: 4 }, next);
-        },
-        (result, next) => {
-          result.should.equal('OK');
-          client.hgetall(key, next);
-        }
-      ], (err, result) => {
-        result.startingProp1.should.eql('1');
-        result.startingProp2.should.eql('2');
-        result.nextProp1.should.eql('3');
-        result.nextProp2.should.eql('4');
-        done(err);
+      await client.delAsync(key);
+      let res = await client.hmsetAsync(key, object);
+      expect(res).to.eql('OK');
+      res = await client.hmsetAsync(key, { nextProp1: 3, nextProp2: 4 });
+      expect(res).to.eql('OK');
+      res = await client.hgetallAsync(key);
+      expect(res).to.eql({
+        startingProp1: '1',
+        startingProp2: '2',
+        nextProp1: '3',
+        nextProp2: '4',
       });
     });
 
+  });
+
+  it('delete hset', async () => {
+    await client.hsetAsync('a:0', 'b', 1);
+    const del = await client.delAsync('a:0');
+    const all = await client.hgetallAsync('a:0');
+    expect(all).to.eql(null);
+    expect(del).to.eql(1);
+  });
+
+  it('delete wildcard', async () => {
+    await client.hsetAsync('a', 'b', 1);
+    await client.delAsync('a');
+    const r = await client.hgetAsync('a', 'b');
+    expect(r).to.eql(null);
   });
 
 });
