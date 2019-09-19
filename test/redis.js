@@ -15,7 +15,7 @@ describe('Redis', () => {
   });
   after(() => client.quit());
 
-  beforeEach(async () => client.flushdb());
+  beforeEach(() => client.flushdb());
 
   it('set - get', async () => {
     const key = 'key', value = 'value';
@@ -115,6 +115,15 @@ describe('Redis', () => {
     await client.delAsync('a');
     const r = await client.hgetAsync('a', 'b');
     expect(r).to.eql(null);
+  });
+
+  it('rpush', done => {
+    client.rpush('key', '{"a": "b"}', (err, res) => {
+      // console.log('err:', err)
+      // console.log('res:', res)
+      expect(res).to.eql(1);
+      done();
+    })
   });
 
 });

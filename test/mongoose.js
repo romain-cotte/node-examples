@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const mongoose = require('mongoose');
 const should = require('should');
 
@@ -13,6 +14,9 @@ describe('Mongoose', () => {
     address: {
       street: '3 rue de l\'Eglise',
       city: 'Paris'
+    },
+    test: {
+      a: '1'
     }
   };
 
@@ -23,7 +27,7 @@ describe('Mongoose', () => {
 
   beforeEach(async () => {
     user = new User(userContent);
-    await User.remove();
+    await User.deleteMany();
     return user.save();
   });
 
@@ -152,4 +156,20 @@ describe('Mongoose', () => {
     r._id.should.eql(user._id);
   });
 
-});
+  it('should update a new field', async () => {
+    await User.update({
+      _id: user._id
+    }, {
+      lastname: 'newlastname',
+      'test.b': '2'
+    })
+    const u = await User.findOne({ _id: user._id })
+    _.omit(u.toJSON(), ['updatedAt', 'createdAt']).should.eql({
+      ...userContent,
+      __v: 0,
+      lastname: 'newlastname',
+      test: { a: '1', b: '2' },
+      pets: [],
+    })
+  })
+})
