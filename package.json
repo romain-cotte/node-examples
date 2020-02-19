@@ -12,7 +12,7 @@
     "crawler-user-agents": "git+https://github.com/monperrus/crawler-user-agents.git",
     "grpc": "^1.23.3",
     "immutable": "^3.7.6",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "moment": "^2.20.1",
     "mongodb": "^3.0.10",
     "mongoose": "^5.7.5",
