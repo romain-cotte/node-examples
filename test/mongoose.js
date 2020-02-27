@@ -172,4 +172,14 @@ describe('Mongoose', () => {
       pets: [],
     })
   })
+
+  it('findOneAndUpdate', async () => {
+    const _id = new mongoose.Types.ObjectId();
+    const data = {
+      firstname: 'firstname',
+      lastname: 'lastname',
+    }
+    await User.findOneAndUpdate({ _id: data.id }, data, { upsert: true });
+    const user = await User.findOne({ _id: data.id });
+  });
 })
