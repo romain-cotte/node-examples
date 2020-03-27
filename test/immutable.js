@@ -21,11 +21,11 @@ describe('immutable', () => {
     list2.size.should.eql(5);
   });
 
-  it('getIn', () => {
+  it('get', () => {
     const list1 = Immutable.List.of(1, 3, 7, 10);
     list1.getIn([3]).should.eql(10);
     const map = Immutable.Map({ a:1, b:2, c:3 });
-    map.getIn('b').should.eql(2);
+    map.get('b').should.eql(2);
   });
 
 });

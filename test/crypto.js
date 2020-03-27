@@ -1,5 +1,3 @@
-'use strict';
-
 const crypto = require('crypto');
 const should = require('should') //eslint-disable-line
 

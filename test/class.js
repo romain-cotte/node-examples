@@ -1,5 +1,3 @@
-'use strict';
-
 const A = require('../classes/A.js');
 const B = require('../classes/B.js');
 const C = require('../classes/C.js');

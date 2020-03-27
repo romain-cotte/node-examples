@@ -1,9 +1,7 @@
-'use strict';
-
 const _ = require('lodash');
 const should = require('should') //eslint-disable-line
 
-describe('Basics', () => {
+describe('basics', () => {
 
   it('comparisons', () => {
     /*eslint-disable */

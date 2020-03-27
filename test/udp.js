@@ -1,5 +1,3 @@
-'use strict';
-
 const dgram = require('dgram');
 const server = dgram.createSocket('udp4');
 const client = dgram.createSocket('udp4');

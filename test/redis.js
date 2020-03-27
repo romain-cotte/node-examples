@@ -1,7 +1,7 @@
 const async = require('async');
 const Promise = require('bluebird');
 const redis = require('redis');
-const { expect } = require('chai');
+const { expect } = require('chai');
 
 Promise.promisifyAll(redis);
 

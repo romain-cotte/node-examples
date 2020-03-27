@@ -35,7 +35,7 @@ describe('amqp', () => {
       shared.channel.ack(msg);
       done();
     });
-    shared.channel.sendToQueue(shared.queue1, new Buffer(message));
+    shared.channel.sendToQueue(shared.queue1, Buffer.from(message));
   });
 
   it('send a message and nack it, retry 5 times', done => {
@@ -60,7 +60,7 @@ describe('amqp', () => {
       shared.channel.ack(msg, false, true);
     });
 
-    shared.channel.sendToQueue(shared.queue2, new Buffer(JSON.stringify(message)));
+    shared.channel.sendToQueue(shared.queue2, Buffer.from(JSON.stringify(message)));
   });
 
 });
