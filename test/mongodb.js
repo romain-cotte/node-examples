@@ -17,8 +17,8 @@ describe('Mongodb', () => {
   after(() => client.close());
 
   beforeEach(async () => {
-    await collection.remove();
-    shared.documents = await collection.insert([{ a : 1 }, { a : 2 }, { a : 3 }]);
+    await collection.deleteMany({});
+    shared.documents = await collection.insertMany([{ a : 1 }, { a : 2 }, { a : 3 }]);
   });
 
   it('should insert 3 documents into the document collection', async () => {
@@ -31,7 +31,7 @@ describe('Mongodb', () => {
   });
 
   it('should update a document', done => {
-    collection.update({ a : 2 }, { $set: { b : 1 } })
+    collection.updateOne({ a : 2 }, { $set: { b : 1 } })
       .then(result => {
         result.result.n.should.eql(1);
         done();

@@ -103,7 +103,7 @@ describe('Mongoose', () => {
   });
 
   it('should update', async () => {
-    const r = await User.update(
+    const r = await User.updateOne(
         { _id: user._id },
         { firstname: 'newFirstname' }
       );
@@ -112,7 +112,7 @@ describe('Mongoose', () => {
   });
 
   it.skip('should update a field and push a new value in pets array', done => {
-    User.update(
+    User.updateOne(
       { _id: user._id },
       { firstname: 'AAA', $push: { pets: 'dog' } }
     )
@@ -157,7 +157,7 @@ describe('Mongoose', () => {
   });
 
   it('should update a new field', async () => {
-    await User.update({
+    await User.updateOne({
       _id: user._id
     }, {
       lastname: 'newlastname',
@@ -179,7 +179,14 @@ describe('Mongoose', () => {
       firstname: 'firstname',
       lastname: 'lastname',
     }
-    await User.findOneAndUpdate({ _id: data.id }, data, { upsert: true });
+    await User.findOneAndUpdate(
+      { _id: data.id },
+      data,
+      {
+        upsert: true,
+        useFindAndModify: false
+      }
+    );
     const user = await User.findOne({ _id: data.id });
   });
 })
