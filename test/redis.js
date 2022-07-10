@@ -1,62 +1,59 @@
-import Promise from 'bluebird'
 import redis from 'redis';
 import { expect } from 'chai';
 
-Promise.promisifyAll(redis);
-
-describe('Redis', () => {
+describe.only('Redis', () => {
   let client;
-  before(() => {
+  before(async () => {
     client = redis.createClient({
       url: 'redis://localhost:6379'
     });
     client.on('error', err => {
       console.log('Error', err) //eslint-disable-line
     });
+    await client.connect();
   });
   after(() => client.quit());
-
-  beforeEach(() => client.flushdb());
+  beforeEach(() => client.flushDb());
 
   it('set - get', async () => {
     const key = 'key', value = 'value';
-    const res = await client.setAsync(key, value);
+    const res = await client.set(key, value);
     expect(res).to.eql('OK');
-    const result = await client.getAsync(key);
+    const result = await client.get(key);
     expect(result).to.eql(value);
   });
 
   it('incr', async () => {
     let key = 'key0', value = 1;
-    await client.setAsync(key, value);
-    const result = await client.incrAsync(key);
+    await client.set(key, value);
+    const result = await client.incr(key);
     expect(result).to.eql(++value);
   });
 
   it('should delete a key', async () => {
     const key = 'key';
     const value = 'value';
-    await client.setAsync(key, value);
-    await client.delAsync(key);
-    const res = await client.getAsync(key);
+    await client.set(key, value);
+    await client.del(key);
+    const res = await client.get(key);
     expect(res).to.eql(null);
   });
 
   it('first incr', async () => {
     const key = 'key1';
-    await client.delAsync(key);
-    const res = await client.incrAsync(key);
+    await client.del(key);
+    const res = await client.incr(key);
     expect(res).to.eql(1);
   });
 
   it('storing hash', async () => {
     const key = 'key 0';
-    await client.delAsync(key);
-    let res = await client.hsetAsync(key, 'property', 'value');
+    await client.del(key);
+    let res = await client.HSET(key, 'property', 'value');
     expect(res).to.eql(1);
-    res = await client.hkeysAsync(key);
+    res = await client.HKEYS(key);
     expect(res).to.eql(['property']);
-    res = await client.hgetallAsync(key);
+    res = await client.HGETALL(key);
     expect(res).to.eql({ property: 'value' });
   });
 
@@ -67,13 +64,15 @@ describe('Redis', () => {
       property2: 'value2',
       property3: 'value3'
     };
-    let res = await client.hmsetAsync([
+    let res = await client.HSET(
       key,
-      'property1', 'value1',
-      'property2', 'value2',
-      'property3', 'value3'
-    ]);
-    res = await client.hgetallAsync(key);
+      {
+        'property1': 'value1',
+        'property2': 'value2',
+        'property3': 'value3'
+      }
+    );
+    res = await client.HGETALL(key);
     expect(res).to.eql(obj);
   });
 
@@ -85,14 +84,14 @@ describe('Redis', () => {
       key3: { subKey: new Date().getTime() }
     };
 
-    it('hmset does not overwrite other properties', async () => {
+    it('HSET does not overwrite other properties', async () => {
       const object = { startingProp1: 1, startingProp2: 2 };
-      await client.delAsync(key);
-      let res = await client.hmsetAsync(key, object);
-      expect(res).to.eql('OK');
-      res = await client.hmsetAsync(key, { nextProp1: 3, nextProp2: 4 });
-      expect(res).to.eql('OK');
-      res = await client.hgetallAsync(key);
+      await client.del(key);
+      let res = await client.HSET(key, object);
+      expect(res).to.eql(2);
+      res = await client.HSET(key, { nextProp1: 3, nextProp2: 4 });
+      expect(res).to.eql(2);
+      res = await client.HGETALL(key);
       expect(res).to.eql({
         startingProp1: '1',
         startingProp2: '2',
@@ -103,28 +102,26 @@ describe('Redis', () => {
 
   });
 
-  it('delete hset', async () => {
-    await client.hsetAsync('a:0', 'b', 1);
-    const del = await client.delAsync('a:0');
-    const all = await client.hgetallAsync('a:0');
-    expect(all).to.eql(null);
+  it('delete HSET', async () => {
+    await client.HSET('a:0', 'b', 1);
+    const del = await client.del('a:0');
+    const all = await client.HGETALL('a:0');
+    expect(all).to.eql({});
     expect(del).to.eql(1);
   });
 
   it('delete wildcard', async () => {
-    await client.hsetAsync('a', 'b', 1);
-    await client.delAsync('a');
-    const r = await client.hgetAsync('a', 'b');
+    await client.HSET('a', 'b', 1);
+    await client.del('a');
+    const r = await client.HGET('a', 'b');
     expect(r).to.eql(null);
   });
 
-  it('rpush', done => {
-    client.rpush('key', '{"a": "b"}', (err, res) => {
-      // console.log('err:', err)
-      // console.log('res:', res)
-      expect(res).to.eql(1);
-      done();
-    });
+  it('rpush', async () => {
+    const r = await client.RPUSH('key', '{"a": "b"}')
+    expect(r).to.eql(1)
+    const s = await client.LRANGE('key', 0, -1)
+    expect(s).to.eql(['{"a": "b"}'])
   });
 
 });
