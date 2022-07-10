@@ -1,4 +1,4 @@
-import sinon from 'sinon'
+import sinon from 'sinon';
 import should from 'should' //eslint-disable-line
 
 describe('Sinon', () => {

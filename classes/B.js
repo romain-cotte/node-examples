@@ -1,4 +1,4 @@
-import A from './A.js'
+import A from './A.js';
 
 class B extends A {
   /* Overwrite A's method */
@@ -21,4 +21,4 @@ class B extends A {
   }
 }
 
-export default B
+export default B;

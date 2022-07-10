@@ -1,5 +1,5 @@
 import should from 'should' //eslint-disable-line
-import moment from 'moment'
+import moment from 'moment';
 
 process.env.TZ = 'UTC';
 

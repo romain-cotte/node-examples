@@ -2,7 +2,7 @@ import A from '../classes/A.js';
 import B from '../classes/B.js';
 import C from '../classes/C.js';
 
-import staticA from '../classes/StaticA.js'
+import staticA from '../classes/StaticA.js';
 import should from 'should' //eslint-disable-line
 
 describe('Class', () => {

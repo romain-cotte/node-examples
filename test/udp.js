@@ -1,4 +1,4 @@
-import dgram from 'dgram'
+import dgram from 'dgram';
 const server = dgram.createSocket('udp4');
 const client = dgram.createSocket('udp4');
 

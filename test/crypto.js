@@ -1,4 +1,4 @@
-import crypto from 'crypto'
+import crypto from 'crypto';
 import should from 'should' //eslint-disable-line
 
 describe('crypto', () => {

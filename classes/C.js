@@ -9,4 +9,4 @@ class C {
   }
 }
 
-export default C
+export default C;

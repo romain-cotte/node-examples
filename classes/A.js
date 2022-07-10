@@ -31,4 +31,4 @@ class A {
 
 A.prop = 'prop';
 
-export default A
+export default A;

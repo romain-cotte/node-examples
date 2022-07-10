@@ -2,7 +2,7 @@
  * See https://facebook.github.io/immutable-js/
  */
 import should from 'should' //eslint-disable-line
-import Immutable from 'immutable'
+import Immutable from 'immutable';
 
 describe('immutable', () => {
 

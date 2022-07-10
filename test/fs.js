@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'fs';
 import should from 'should' //eslint-disable-line
 
 describe('fs', () => {

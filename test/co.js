@@ -1,4 +1,4 @@
-import co from 'co'
+import co from 'co';
 import should from 'should' //eslint-disable-line
 
 describe('co', () => {
