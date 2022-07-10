@@ -78,12 +78,6 @@ describe('Redis', () => {
 
   describe('storing nested object', () => {
     const key = 'key B';
-    const obj = {
-      key1: 'value1',
-      key2: { subKey: 'value2' },
-      key3: { subKey: new Date().getTime() }
-    };
-
     it('HSET does not overwrite other properties', async () => {
       const object = { startingProp1: 1, startingProp2: 2 };
       await client.del(key);
@@ -118,10 +112,10 @@ describe('Redis', () => {
   });
 
   it('rpush', async () => {
-    const r = await client.RPUSH('key', '{"a": "b"}')
-    expect(r).to.eql(1)
-    const s = await client.LRANGE('key', 0, -1)
-    expect(s).to.eql(['{"a": "b"}'])
+    const r = await client.RPUSH('key', '{"a": "b"}');
+    expect(r).to.eql(1);
+    const s = await client.LRANGE('key', 0, -1);
+    expect(s).to.eql(['{"a": "b"}']);
   });
 
 });

@@ -1,5 +1,5 @@
-import should from 'should'
-import Stream from 'stream'
+import should from 'should';
+import Stream from 'stream';
 
 describe('Stream', () => {
   let cnt = 0;

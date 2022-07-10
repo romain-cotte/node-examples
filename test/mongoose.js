@@ -1,10 +1,10 @@
-import _ from 'lodash'
-import mongoose from 'mongoose'
+import _ from 'lodash';
+import mongoose from 'mongoose';
 import should from 'should' //eslint-disable-line
 import { expect } from 'chai';
 
 import models from '../models/index.js';
-const { User } = models
+const { User } = models;
 
 describe('Mongoose', () => {
   let user;
@@ -113,7 +113,7 @@ describe('Mongoose', () => {
       upsertedId: null,
       upsertedCount: 0,
       matchedCount: 1
-    })
+    });
   });
 
   it.skip('should update a field and push a new value in pets array', done => {
@@ -121,15 +121,15 @@ describe('Mongoose', () => {
       { _id: user._id },
       { firstname: 'AAA', $push: { pets: 'dog' } }
     )
-    .then(() => {
-      return User.findOne({ _id: user._id });
-    })
-    .then(u => {
-      u.firstname.should.eql('AAA');
-      u.pets.should.eql(['dog']);
-      done();
-    })
-    .catch(done);
+      .then(() => {
+        return User.findOne({ _id: user._id });
+      })
+      .then(u => {
+        u.firstname.should.eql('AAA');
+        u.pets.should.eql(['dog']);
+        done();
+      })
+      .catch(done);
   });
 
   it('should return user count', async () => {
@@ -167,31 +167,42 @@ describe('Mongoose', () => {
     }, {
       lastname: 'newlastname',
       'test.b': '2'
-    })
-    const u = await User.findOne({ _id: user._id })
+    });
+    const u = await User.findOne({ _id: user._id });
     _.omit(u.toJSON(), ['updatedAt', 'createdAt']).should.eql({
       ...userContent,
       __v: 0,
       lastname: 'newlastname',
       test: { a: '1', b: '2' },
       pets: [],
-    })
-  })
+    });
+  });
 
   it('findOneAndUpdate', async () => {
-    const _id = new mongoose.Types.ObjectId();
     const data = {
       firstname: 'firstname',
       lastname: 'lastname',
-    }
+    };
     await User.findOneAndUpdate(
-      { _id: data.id },
+      data,
       data,
       {
         upsert: true,
         useFindAndModify: false
       }
     );
-    const user = await User.findOne({ _id: data.id });
+    const user = await User.findOne(data);
+    _.omit(
+      user.toJSON(),
+      [
+        '_id',
+        'pets',
+        'updatedAt',
+        'createdAt'
+      ]).should.eql({
+      __v: 0,
+      firstname: 'firstname',
+      lastname: 'lastname',
+    });
   });
 });

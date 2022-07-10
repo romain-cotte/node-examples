@@ -1,5 +1,5 @@
-import amqplib from 'amqplib'
-import should from 'should'
+import amqplib from 'amqplib';
+import should from 'should';
 
 describe('amqp', () => {
 

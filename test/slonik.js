@@ -1,4 +1,4 @@
-import { sql } from 'slonik'
+import { sql } from 'slonik';
 import should from 'should' //eslint-disable-line
 
 describe('slonik', () => {
