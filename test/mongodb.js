@@ -39,7 +39,7 @@ describe('Mongodb', () => {
       upsertedId: null,
       upsertedCount: 0,
       matchedCount: 1
-    })
+    });
   });
 
   it('should find one document', done => {

@@ -12,21 +12,21 @@ describe('Stream', () => {
         this.push(null);
       }
     }
-  })
+  });
 
   it('should write from a readable stream', done => {
     let results = [];
     let writable = new Stream.Writable({
       objectMode: true,
       write(chunk, enc, next) {
-        results.push(chunk)
+        results.push(chunk);
         next();
       }
     });
     Stream.pipeline(readable, writable, (err) => {
       should.not.exist(err);
-      results.should.eql([ 1, 2, 3, 4, 5])
+      results.should.eql([ 1, 2, 3, 4, 5]);
       done();
-    })
+    });
   });
 });

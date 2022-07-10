@@ -7,11 +7,11 @@ describe('co', () => {
     co(function* () {
       return yield Promise.resolve(true);
     })
-    .then(val => {
-      val.should.be.true();
-      done();
-    })
-    .catch(done);
+      .then(val => {
+        val.should.be.true();
+        done();
+      })
+      .catch(done);
   });
 
   it('generic example with several promises', done => {
@@ -20,11 +20,11 @@ describe('co', () => {
       const s = yield Promise.resolve(r);
       return s;
     })
-    .then(val => {
-      val.should.be.true();
-      done();
-    })
-    .catch(done);
+      .then(val => {
+        val.should.be.true();
+        done();
+      })
+      .catch(done);
   });
 
   it('wrapping a function', done => {
@@ -46,10 +46,10 @@ describe('co', () => {
       let c = Promise.resolve(3);
       return yield [a, b, c];
     })
-    .then(r => {
-      r.should.eql([1, 2, 3]);
-      done();
-    });
+      .then(r => {
+        r.should.eql([1, 2, 3]);
+        done();
+      });
   });
 
   it('resolve object', done => {
@@ -60,10 +60,10 @@ describe('co', () => {
       };
       return res;
     })
-    .then(r => {
-      r.should.eql({ '1': 1, '2': 2 });
-      done();
-    });
+      .then(r => {
+        r.should.eql({ '1': 1, '2': 2 });
+        done();
+      });
   });
 
 });

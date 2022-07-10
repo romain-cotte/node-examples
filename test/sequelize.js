@@ -30,7 +30,7 @@ describe.skip('Sequelize', () => {
 
   beforeEach('set transaction', () => {
     return sequelize.transaction();
-      // .then(_transaction => transaction = _transaction);
+    // .then(_transaction => transaction = _transaction);
   });
 
   after('remove all persons', () => {
@@ -94,17 +94,17 @@ describe.skip('Sequelize', () => {
         ['firstname', 'DESC']
       ]
     })
-    .then(_person => {
-      _person.get('lastname').should.eql('lastname');
-      return Person.findOne({
-        order: [
-          ['firstname', 'ASC']
-        ]
+      .then(_person => {
+        _person.get('lastname').should.eql('lastname');
+        return Person.findOne({
+          order: [
+            ['firstname', 'ASC']
+          ]
+        });
+      })
+      .then(_person => {
+        _person.get('lastname').should.eql('Lastname 0');
       });
-    })
-    .then(_person => {
-      _person.get('lastname').should.eql('Lastname 0');
-    });
   });
 
 });

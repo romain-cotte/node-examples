@@ -1,4 +1,3 @@
-const async = require('async');
 const Promise = require('bluebird');
 const redis = require('redis');
 const { expect } = require('chai');
@@ -9,7 +8,7 @@ describe('Redis', () => {
   let client;
   before(() => {
     client = redis.createClient({
-      url: `redis://localhost:6379`
+      url: 'redis://localhost:6379'
     });
     client.on('error', err => {
       console.log('Error', err) //eslint-disable-line
@@ -125,7 +124,7 @@ describe('Redis', () => {
       // console.log('res:', res)
       expect(res).to.eql(1);
       done();
-    })
+    });
   });
 
 });
