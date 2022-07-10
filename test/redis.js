@@ -9,7 +9,7 @@ describe('Redis', () => {
   let client;
   before(() => {
     client = redis.createClient({
-      url: `redis://redis:6379`
+      url: `redis://localhost:6379`
     });
     client.on('error', err => {
       console.log('Error', err) //eslint-disable-line
