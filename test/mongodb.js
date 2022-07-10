@@ -11,7 +11,6 @@ describe('Mongodb', () => {
   before(async () => {
     client = new mongodb.MongoClient(url);
     await client.connect();
-    console.log('connected')
     collection = client.db('node-examples').collection('documents');
     shared = {};
   });
