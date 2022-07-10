@@ -16,7 +16,6 @@
     "pg": "^8.7.3",
     "redis": "^4.2.0",
     "request": "^2.88.2",
-    "request-promise": "^4.2.6",
     "sequelize": "^6.4.0",
     "sinon": "^14.0.0",
     "slonik": "^28.1.1"
