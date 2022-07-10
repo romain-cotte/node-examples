@@ -38,6 +38,12 @@ jobs:
           # Opens tcp port 6379 on the host and service container
           - 27017:27017
 
+      rabbitmq:
+        image: rabbitmq
+        ports:
+          - 5672:5672
+          - 15672:15672
+
     strategy:
       matrix:
         node-version: [12.x, 14.x, 16.x]
