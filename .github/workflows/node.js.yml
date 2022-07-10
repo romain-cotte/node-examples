@@ -22,11 +22,6 @@ jobs:
         # Docker Hub image
         image: redis
         # Set health checks to wait until redis has started
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
         ports:
           # Opens tcp port 6379 on the host and service container
           - 6379:6379
@@ -46,7 +41,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [14.x, 16.x, 17.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
