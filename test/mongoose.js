@@ -189,4 +189,4 @@ describe('Mongoose', () => {
     );
     const user = await User.findOne({ _id: data.id });
   });
-})
+});

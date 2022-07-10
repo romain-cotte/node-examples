@@ -9,7 +9,9 @@ describe('Mongodb', () => {
   let shared;
 
   before(async () => {
-    client = await mongodb.MongoClient.connect(url);
+    client = new mongodb.MongoClient(url);
+    await client.connect();
+    console.log('connected')
     collection = client.db('node-examples').collection('documents');
     shared = {};
   });
@@ -30,12 +32,15 @@ describe('Mongodb', () => {
     expect(documents.length).to.eql(1);
   });
 
-  it('should update a document', done => {
-    collection.updateOne({ a : 2 }, { $set: { b : 1 } })
-      .then(result => {
-        result.result.n.should.eql(1);
-        done();
-      });
+  it('should update a document', async () => {
+    const updateResult = await collection.updateOne({ a: 3 }, { $set: { b: 1 } });
+    expect(updateResult).to.eql({
+      acknowledged: true,
+      modifiedCount: 1,
+      upsertedId: null,
+      upsertedCount: 0,
+      matchedCount: 1
+    })
   });
 
   it('should find one document', done => {
