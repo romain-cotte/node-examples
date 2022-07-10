@@ -1,7 +1,7 @@
 import redis from 'redis';
 import { expect } from 'chai';
 
-describe.only('Redis', () => {
+describe('Redis', () => {
   let client;
   before(async () => {
     client = redis.createClient({
