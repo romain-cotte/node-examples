@@ -1,8 +1,4 @@
 <h1 align=center>node-examples</h1>
-<p align=center>
-  <a href="https://travis-ci.org/romain-cotte/node-examples"><img src="https://img.shields.io/travis/romain-cotte/node-examples/master.svg?style=flat-square" alt="Build Status"></a>
-  <a href="https://david-dm.org/romain-cotte/node-examples"><img src="https://status.david-dm.org/gh/romain-cotte/node-examples.svg?style=flat-square" alt="Dependency Status"></a>
-</p>
 
 
 References
