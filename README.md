@@ -1,5 +1,8 @@
 <h1 align=center>node-examples</h1>
 
+![example workflow](https://github.com/romain-cotte/node-examples/actions/workflows/node.js.yml/badge.svg)
+
+
 
 References
 ---
