@@ -1,5 +1,3 @@
-'use strict';
-
 class A {
 
   // ?string may be null or undefined
@@ -33,4 +31,4 @@ class A {
 
 A.prop = 'prop';
 
-module.exports = A;
+export default A

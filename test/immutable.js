@@ -1,8 +1,8 @@
 /**
  * See https://facebook.github.io/immutable-js/
  */
-const should = require('should'); // eslint-disable-line
-const Immutable = require('immutable');
+import should from 'should' //eslint-disable-line
+import Immutable from 'immutable'
 
 describe('immutable', () => {
 

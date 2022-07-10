@@ -1,9 +1,10 @@
-const _ = require('lodash');
-const mongoose = require('mongoose');
-const should = require('should');
-const { expect } = require('chai');
+import _ from 'lodash'
+import mongoose from 'mongoose'
+import should from 'should' //eslint-disable-line
+import { expect } from 'chai';
 
-const { User } = require('../models');
+import models from '../models/index.js';
+const { User } = models
 
 describe('Mongoose', () => {
   let user;
@@ -26,7 +27,7 @@ describe('Mongoose', () => {
 
   beforeEach(async () => {
     user = new User(userContent);
-    await User.deleteMany();
+    await models.User.deleteMany();
     return user.save();
   });
 

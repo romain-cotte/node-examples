@@ -1,6 +1,6 @@
-const mongodb = require('mongodb');
-const should = require('should'); // eslint-disable-line
-const { expect } = require('chai');
+import mongodb from 'mongodb';
+import should from 'should' //eslint-disable-line
+import { expect } from 'chai';
 
 const url = 'mongodb://localhost:27017';
 

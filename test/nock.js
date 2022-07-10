@@ -1,6 +1,6 @@
-const nock = require('nock');
-const rp = require('request-promise');
-const should = require('should'); // eslint-disable-line
+import nock from 'nock';
+import rp from 'request-promise';
+import should from 'should'; // eslint-disable-line
 
 describe('Nock', () => {
 

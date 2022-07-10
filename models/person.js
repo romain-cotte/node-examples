@@ -3,7 +3,7 @@
  * Sequelize.STRING corresponds to character varying(255)
  *
  */
-const Sequelize = require('sequelize');
+import Sequelize from 'sequelize'
 
 module.exports = sequelize => {
   return sequelize.define('Person', {

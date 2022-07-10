@@ -1,5 +1,5 @@
-const fs = require('fs');
-const should = require('should');
+import fs from 'fs'
+import should from 'should' //eslint-disable-line
 
 describe('fs', () => {
 

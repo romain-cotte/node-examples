@@ -1,6 +1,4 @@
-'use strict';
-
-const A = require('./A');
+import A from './A.js'
 
 class B extends A {
   /* Overwrite A's method */
@@ -23,4 +21,4 @@ class B extends A {
   }
 }
 
-module.exports = B;
+export default B

@@ -1,8 +1,8 @@
-const dgram = require('dgram');
+import dgram from 'dgram'
 const server = dgram.createSocket('udp4');
 const client = dgram.createSocket('udp4');
 
-const should = require('should') //eslint-disable-line
+import should from 'should' //eslint-disable-line
 const PORT = 41234;
 
 describe.skip('UDP', () => {

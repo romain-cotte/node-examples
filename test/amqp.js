@@ -1,6 +1,5 @@
-const amqplib = require('amqplib');
-const Promise = require('bluebird');
-const should = require('should');
+import amqplib from 'amqplib'
+import should from 'should'
 
 describe('amqp', () => {
 

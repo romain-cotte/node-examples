@@ -1,5 +1,3 @@
-'use strict';
-
 class C {
   constructor(...args) {
     this.args = args;
@@ -11,4 +9,4 @@ class C {
   }
 }
 
-module.exports = C;
+export default C

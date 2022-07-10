@@ -1,5 +1,5 @@
-const { sql } = require('slonik');
-const should = require('should'); // eslint-disable-line
+import { sql } from 'slonik'
+import should from 'should' //eslint-disable-line
 
 describe('slonik', () => {
   it('method name', async () => {

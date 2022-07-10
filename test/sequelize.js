@@ -2,10 +2,10 @@ if (process.env.NODE_ENV === 'production') {
   throw new Error('You cannot run test on production environment');
 }
 
-const Sequelize = require('sequelize');
-const should = require('should'); // eslint-disable-line
+import Sequelize from 'sequelize'
+import should from 'should' // eslint-disable-line
 
-const CONFIG = require('../config');
+import CONFIG from '../config/index.js'
 
 describe.skip('Sequelize', () => {
   let Person, person;

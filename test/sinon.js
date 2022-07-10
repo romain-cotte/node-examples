@@ -1,5 +1,5 @@
-const sinon = require('sinon');
-const should = require('should');
+import sinon from 'sinon'
+import should from 'should' //eslint-disable-line
 
 describe('Sinon', () => {
 

@@ -1,9 +1,9 @@
-const A = require('../classes/A.js');
-const B = require('../classes/B.js');
-const C = require('../classes/C.js');
+import A from '../classes/A.js';
+import B from '../classes/B.js';
+import C from '../classes/C.js';
 
-const staticA = require('../classes/StaticA.js');
-const should = require('should') //eslint-disable-line
+import staticA from '../classes/StaticA.js'
+import should from 'should' //eslint-disable-line
 
 describe('Class', () => {
 

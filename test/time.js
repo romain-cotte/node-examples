@@ -1,5 +1,5 @@
-const should = require('should') //eslint-disable-line
-const moment = require('moment');
+import should from 'should' //eslint-disable-line
+import moment from 'moment'
 
 process.env.TZ = 'UTC';
 

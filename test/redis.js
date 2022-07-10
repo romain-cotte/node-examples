@@ -1,6 +1,6 @@
-const Promise = require('bluebird');
-const redis = require('redis');
-const { expect } = require('chai');
+import Promise from 'bluebird'
+import redis from 'redis';
+import { expect } from 'chai';
 
 Promise.promisifyAll(redis);
 

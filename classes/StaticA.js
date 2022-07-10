@@ -1,5 +1,3 @@
-'use strict';
-
 class StaticA {
 
   constructor() {
@@ -12,4 +10,4 @@ class StaticA {
 
 }
 
-module.exports = new StaticA();
+export default new StaticA();

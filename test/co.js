@@ -1,5 +1,5 @@
-const co = require('co');
-const should = require('should'); // eslint-disable-line
+import co from 'co'
+import should from 'should' //eslint-disable-line
 
 describe('co', () => {
 
