@@ -1,8 +1,7 @@
 const _ = require('lodash');
 const mongoose = require('mongoose');
 const should = require('should');
-
-mongoose.Promise = require('bluebird');
+const { expect } = require('chai');
 
 const { User } = require('../models');
 
@@ -104,11 +103,16 @@ describe('Mongoose', () => {
 
   it('should update', async () => {
     const r = await User.updateOne(
-        { _id: user._id },
-        { firstname: 'newFirstname' }
-      );
-    r.ok.should.eql(1);
-    r.n.should.eql(1);
+      { _id: user._id },
+      { firstname: 'newFirstname' }
+    );
+    expect(r).to.eql({
+      acknowledged: true,
+      modifiedCount: 1,
+      upsertedId: null,
+      upsertedCount: 0,
+      matchedCount: 1
+    })
   });
 
   it.skip('should update a field and push a new value in pets array', done => {
