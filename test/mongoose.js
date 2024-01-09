@@ -20,10 +20,7 @@ describe('Mongoose', () => {
     }
   };
 
-  before(() => mongoose.connect(
-    'mongodb://localhost:27017/node-examples',
-    { useNewUrlParser: true }
-  ));
+  before(() => mongoose.connect('mongodb://localhost:27017/node-examples'));
 
   beforeEach(async () => {
     user = new User(userContent);
@@ -155,10 +152,8 @@ describe('Mongoose', () => {
   });
 
   it('should remove the user', async () => {
-    const r = await user.remove();
-    r.firstname.should.eql(user.firstname);
-    r.lastname.should.eql(user.lastname);
-    r._id.should.eql(user._id);
+    const r = await User.deleteOne({ _id: user._id })
+    r.deletedCount.should.eql(1);
   });
 
   it('should update a new field', async () => {
