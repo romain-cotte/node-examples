@@ -152,7 +152,7 @@ describe('Mongoose', () => {
   });
 
   it('should remove the user', async () => {
-    const r = await User.deleteOne({ _id: user._id })
+    const r = await User.deleteOne({ _id: user._id });
     r.deletedCount.should.eql(1);
   });
 
