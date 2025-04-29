@@ -1,9 +1,9 @@
-schema @link(url: "https://specs.apollo.dev/federation/v2.3", import: ["@key", "@shareable"]) {
+schema @link(url: "https://specs.apollo.dev/federation/v2.3", import: ["@external", "@key", "@override", "@shareable"]) {
   query: Query
 }
 
 type Query {
-  users: [User]
+  user(id: ID!): User @shareable
 }
 
 type User @key(fields: "id") {

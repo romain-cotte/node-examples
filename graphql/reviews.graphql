@@ -1,10 +1,11 @@
+extend schema @link(url: "https://specs.apollo.dev/federation/v2.3",
+  import: ["@external", "@key", "@override", "@shareable"])
+
 extend type User @key(fields: "id") {
-  id: ID! @external
-  username: String! @external @shareable
-  birthdate: String! @external @override(from: "users")
+  id: ID!
+  username: String! @shareable
   reviews: [Review]
 }
-
 type Review {
   id: ID!
   content: String!
