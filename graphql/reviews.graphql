@@ -1,0 +1,12 @@
+extend type User @key(fields: "id") {
+  id: ID! @external
+  username: String! @external @shareable
+  birthdate: String! @external @override(from: "users")
+  reviews: [Review]
+}
+
+type Review {
+  id: ID!
+  content: String!
+  author: User
+}
