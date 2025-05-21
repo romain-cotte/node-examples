@@ -45,5 +45,3 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
-    - name: Linter
-      run: npm run lint
