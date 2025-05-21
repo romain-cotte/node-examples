@@ -1,7 +1,7 @@
 import amqplib from 'amqplib';
 import should from 'should';
 
-describe.skip('amqp', () => {
+describe('amqp', () => {
 
   let shared = {
     queue1: 'q1',
